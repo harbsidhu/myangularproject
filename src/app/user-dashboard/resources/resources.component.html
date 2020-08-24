@@ -1,0 +1,276 @@
+<div class="row">
+  <nb-card class="width-100 box-shadow-none background-transparent">
+    <nb-card-header class="padding-bottom-0em">
+      <div class="pull-left">
+        Resources Out
+        <br />
+        <span class="font-weight-400">List of resources to divert out of my supply chain</span>
+      </div>
+      <button nbButton (click)="navigateToAddResource();" class="pull-right"><i
+          class="fas fa-plus-circle margin-right-0-6em"></i>Add</button>
+    </nb-card-header>
+    <nb-card-body>
+<div *ngIf="resourcesOut.length == 0">No resources.</div>
+      <nb-accordion multi="true">
+        <nb-accordion-item *ngFor="let item of resourcesOut" class="margin-bottom-0-5em">
+          <nb-accordion-item-header class="font-weight-400">
+            <div class="row">
+              <div class="col-sm-4 col-md-3 border-right">
+                <span class="min-width-10em">{{item.resourceListing?.resource?.name}}</span>
+              </div>
+              <div class="col-sm-4 col-md-2 border-right">
+                <span class="item-status-color">
+                  {{item.resourceListing?.expired ?
+                     'Expired': 
+                     item.resourceListing?.approved  ?                       
+                       'Sold': 
+                      'Active'}}
+                </span>
+              </div>
+              <div class="col-sm-4 col-md-1 border-right">
+                <span>{{item.resourceListing?.idString}}</span>
+              </div>
+              <div class="col-sm-4 col-md-3 border-right">
+                <span> {{item.resourceListing?.quantity}} {{item.resourceListing?.unit?.name}}
+                  {{item.resourceListing?.frequency?.name}}</span>
+              </div>
+              <div class="col-sm-4 col-md-1 border-right">
+                <span>Views:</span> <span class="item-count-color"> {{item.resourceListing?.views}}</span>
+              </div>
+              <div class="col-sm-4 col-md-1 border-right">
+                <span>Offers:</span> <span class="item-count-color"> {{item.resourceOffers?.length}}</span>
+              </div>
+              <div class="icol-sm-4 col-md-1 tem-links font-size-1_2 item-header-icon-color">
+                <label class=" font-size-1em icon-label" nbTooltip="Update"
+                  (click)="navigateToUpdateResource(item.resourceListing.id)" nbTooltipPlacement="bottom">
+                  <nb-icon icon="edit" status="primary" pack="solid">
+                  </nb-icon>
+                </label>
+              </div>
+            </div>
+          </nb-accordion-item-header>
+
+          <nb-accordion-item-body>
+            <div class="row">
+              <div class="col">
+                <div class="pull-right item-links font-size-1_2 item-header-icon-color">
+                  <label class=" font-size-1em icon-label" nbTooltip="View Resource"
+                    (click)="navigateToListing(item.resourceListing.id)" nbTooltipPlacement="bottom">
+                    <nb-icon icon="list" status="primary" pack="solid">
+                    </nb-icon>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="pricing" class="label">Pricing</label>
+                  <br />
+                  <span>{{item.resourceListing?.resourceListType?.label}}</span>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="location" class="label">Location</label>
+                  <br />
+                  <span>{{item.resourceListing?.address?.fullAddress}}</span>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="attributes" class="label">Attributes</label>
+                  <br />
+                  <span>{{item.attributeString}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="price" class="label">List Price</label>
+                  <br />
+                  <span>AU ${{item.price}}</span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="negotiable" class="label">Negotiable</label>
+                  <br />
+                  <span>{{item.resourceListing?.priceNegotiable ? 'Yes' : 'No'}}</span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="CreatedDate" class="label">Date Listed</label>
+                  <br />
+                  <span>{{item.resourceListing?.createdDate | dateFormat}}</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="active" class="label">Active Duration</label>
+                  <br />
+                  <span>{{getActiveDuration(item.resourceListing?.createdDate) }} days</span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-8 col-md-8">
+                <div class="form-group">
+                  <label for="description" class="label">Description</label>
+                  <br />
+                  <span>{{item.resourceListing?.description}}</span>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row min-height-10em">
+
+              <div class="col-sm-12 col-md-12 col-md-12">
+                <ngx-resource-out-offer-grid [listing]="item.resourceListing" [offerData]="item.resourceOffers">
+                </ngx-resource-out-offer-grid>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </nb-card-body>
+  </nb-card>
+
+</div>
+
+<div class="row">
+  <nb-card class="box-shadow-none background-transparent width-100pct">
+    <nb-card-header class="padding-bottom-0em">
+      Resources In
+      <br />
+      <span class="font-weight-400">List of resources to bring into my supply chain</span>
+    </nb-card-header>
+    <nb-card-body>
+      <div *ngIf="resourcesIn.length == 0">No resources.</div>
+      <nb-accordion multi="true">
+        <nb-accordion-item *ngFor="let item of resourcesIn" class="margin-bottom-0-5em">
+          <nb-accordion-item-header class="font-weight-400">
+            <div class="row">
+              <div class="col-sm-4 col-md-3 border-right">
+                <span class="min-width-10em">{{item.resourceListing?.resource?.name}}</span>
+              </div>
+              <div class="col-sm-4 col-md-2 border-right">
+                <span class="item-status-color">
+                  {{item.resourceOffers[0]?.status}}
+                </span>
+              </div>
+              <div class="col-sm-4 col-md-1 border-right">
+                <span>{{item.resourceListing?.idString}}</span>
+              </div>
+              <div class="col-sm-4 col-md-3 border-right">
+                <span> {{item.resourceListing?.quantity}} {{item.resourceListing?.unit?.name}}
+                  {{item.resourceListing?.frequency?.name}}</span>
+              </div>
+              <div class="col-sm-4 col-md-1 border-right">
+                <span>Views:</span> <span class="item-count-color"> {{item.resourceListing?.views}}</span>
+              </div>
+              <div class="col-sm-4 col-md-2">
+                <span>Offers:</span> <span class="item-count-color"> {{item.resourceOffers?.length}}</span>
+              </div>
+            </div>
+          </nb-accordion-item-header>
+
+          <nb-accordion-item-body>
+            <div class="row">
+              <div class="col">
+                <div class="pull-right item-links font-size-1_2 item-header-icon-color">
+                  <label class=" font-size-1em icon-label" nbTooltip="View Resource"
+                    (click)="navigateToListing(item.resourceListing.id)" nbTooltipPlacement="bottom">
+                    <nb-icon icon="list" status="primary" pack="solid">
+                    </nb-icon>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="pricing" class="label">Pricing</label>
+                  <br />
+                  <span>{{item.resourceListing?.resourceListType?.label}}</span>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="location" class="label">Location</label>
+                  <br />
+                  <span>{{item.resourceListing?.approved ? item.resourceListing?.address?.fullAddress : item.resourceListing?.address?.suburb}}</span>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="attributes" class="label">Attributes</label>
+                  <br />
+                  <span>{{item.attributeString}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="price" class="label">List Price</label>
+                  <br />
+                  <span>AU ${{item.price}}</span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="negotiable" class="label">Negotiable</label>
+                  <br />
+                  <span>{{item.resourceListing?.priceNegotiable ? 'Yes' : 'No'}}</span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="location" class="label">Date Listed</label>
+                  <br />
+                  <span>{{item.resourceListing?.createdDate | dateFormat}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-4 col-md-4">
+                <div class="form-group">
+                  <label for="active" class="label">Active Duration</label>
+                  <br />
+                  <span>{{getActiveDuration(item.resourceListing?.createdDate) }} days</span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-8 col-md-8">
+                <div class="form-group">
+                  <label for="location" class="label">Description</label>
+                  <br />
+                  <span>{{item.resourceListing?.description}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row min-height-10em">
+              <div class="col-sm-12 col-md-12 col-md-12">
+                <ngx-resource-in-offer-grid [offerData]="item.resourceOffers"></ngx-resource-in-offer-grid>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </nb-card-body>
+  </nb-card>
+
+</div>

@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="filter-text-div" [ngClass]="{'collapse': !isMenuCollapse}" (click)="toggleFilters();">
+        <i class="fas fa-filter position-fixed "></i>
+    </div>
+    <div class="col-2 div-sidebar" [ngClass]="{'collapse': isMenuCollapse}">
+        <div class="filter-inner-div overflow-auto">
+            <div class="position-fixed filter-header width-12-5em">
+                <div class="pull-right cursor-pointer" nbTooltipPlacement="bottom" (click)="toggleFilters();"><i
+                        class="fas fa-times"></i></div>
+                <div class="padding-top-2em">
+                    <h6>{{title}}</h6>
+                </div>
+            </div>
+            <div class="padding-top-6em">
+                <button class="applyFilter" size="tiny" nbButton (click)="apply()">Apply
+                    filter</button>
+            </div>
+
+            <div class="filter-heading  filter-heading-top" #commodityIds>
+                <strong>Commodity</strong>
+            </div>
+            <div class="row" *ngFor="let item of commodities">
+                <div class="col-12">
+                    <nb-checkbox [id]="item.id" (checkedChange)="getComFilter($event,item.id)" status="primary">
+                        {{item.name}}
+                    </nb-checkbox><br />
+                </div>
+            </div>
+
+            <div class="filter-heading filter-heading-top" #location>
+                <strong>Location</strong>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <nb-radio-group [(ngModel)]="locationFilterType" status="primary">
+                        <nb-radio [value]="1">All</nb-radio>
+                        <nb-radio *ngIf="isRegisteredUser" [value]="2">{{userState}}</nb-radio>
+                        <nb-radio *ngIf="isRegisteredUser" [value]="3">Within (kms)</nb-radio>
+                    </nb-radio-group>
+                    <div *ngIf="locationFilterType == 3">
+                        <div>
+                            <input class="form-control filterInput" [(ngModel)]="locationFilterKms" type="text" nbInput
+                                placeholder="kms" />
+                        </div>
+                        <div> of </div>
+                        <div>
+                            <nb-select class="width-adjust width-100pct" [(ngModel)]="locationFilterAddressId"
+                                nbTooltipPlacement="bottom">
+                                <nb-option *ngFor="let item of _addresses" [value]="item.id">{{item.name}}</nb-option>
+                            </nb-select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="filter-heading filter-heading-top" #pricing>
+                <strong>Price</strong>
+            </div>
+            <div class="row" *ngFor="let item of resourceListingtypes">
+                <div class="col-12">
+                    <nb-checkbox [id]="item.id" (checkedChange)="getPriceFilter($event,item.id)" status="primary">
+                        {{item.label}}
+                    </nb-checkbox><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

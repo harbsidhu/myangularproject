@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-sm-12">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <nb-card size="tiny">
+          <nb-card-header>Diverted from Landfill (tonnes)</nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col ">
+                <div class="card-icon">
+                  <nb-icon class="dashborad-icon padding-right-0_2em" icon="truck-moving" status="primary" pack="fas">
+                  </nb-icon>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <div class="card-item-title">Current month</div>
+                    <span class="font-size-1_2">{{dashboardData.landFillCurrent}}</span>
+                  </div>
+                </div>
+                <div class="row padding-top-1em">
+                  <div class="col">
+                    <div class="card-item-title">Total</div>
+                    <span class="font-size-1_2">{{dashboardData.landFillTotal}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <nb-card size="tiny">
+          <nb-card-header>CO2 Emission Savings (tonnes)</nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col">
+                <div class="card-icon">
+                  <nb-icon class="dashborad-icon" icon="cloud-meatball" status="primary" pack="fas"></nb-icon>
+                </div>
+                </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <div class="card-item-title">Current month</div>
+                    <span class="font-size-1_2">{{dashboardData.cO2SavingsCurrent == 0 ? '0.000' : dashboardData.cO2SavingsCurrent}}</span>
+                  </div>
+                </div>
+                <div class="row padding-top-1em">
+                  <div class="col">
+                    <div class="card-item-title">Total</div>
+                    <span class="font-size-1_2">{{dashboardData.cO2SavingsTotal == 0 ? '0.000' : dashboardData.cO2SavingsTotal}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-6 col-sm-12">
+    <div class="row">
+      <div class="col-md-6">
+        <nb-card size="tiny">
+          <nb-card-header>Resources Exchanged</nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col ">
+                <div class="card-icon">
+                  <nb-icon class="dashborad-icon" icon="sync-alt" status="primary" pack="fas"></nb-icon>
+                </div>
+                </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <div class="card-item-title">Current month</div>
+                    <span class="font-size-1_2">{{dashboardData.wasteExchangedCurrent}}</span>
+                  </div>
+                </div>
+                <div class="row padding-top-1em">
+                  <div class="col">
+                    <div class="card-item-title">Total</div>
+                    <span class="font-size-1_2">{{dashboardData.wasteExchangedTotal}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <nb-card size="tiny">
+          <nb-card-header> Waste Earnings (Revenue)</nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col ">
+                <div class="card-icon">
+                  <nb-icon class="dashborad-icon padding-right-0_2em" icon="hand-holding-usd" status="primary" pack="fas"></nb-icon>
+                   </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <div class="card-item-title">Current month</div>
+                    <span class="font-size-1_2">${{dashboardData.wasteEarningsCurrent}}</span>
+                  </div>
+                </div>
+                <div class="row padding-top-1em">
+                  <div class="col">
+                    <div class="card-item-title">Total</div>
+                    <span class="font-size-1_2">${{dashboardData.wasteEarningsTotal}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-sm-12">
+    <ngx-offer-grid (openChatEmitter)="openChat($event)"></ngx-offer-grid>
+  </div>
+  <div class="col-md-6 col-lg-6 col-sm-12">
+    <ngx-resourcein-grid (openChatEmitter)="openChat($event)"></ngx-resourcein-grid>
+  </div>
+  <chat-widget [isDocked]=false (onChatClose)="toggleChat($event)" *ngIf="ShowChat" [chatTitle] = 'listingIdForChatString' [listingId] = 'listingIdForChat' [fromId]= 'user.id' [toId]= 'buyerIdForChat' ></chat-widget>
+</div>

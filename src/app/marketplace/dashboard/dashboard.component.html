@@ -1,0 +1,113 @@
+<div *ngIf="isUser" class="row">
+    <div class="pr-2">
+        <ngx-search-filter title="Marketplace" [commodities]="commodities"
+        [locationFilterType]="locationFilterType" [userState]="userState" [isRegisteredUser]="isRegisteredUser"
+        [locationFilterType]="locationFilterType" [locationFilterKms]="locationFilterKms"
+        [locationFilterAddressId]="locationFilterAddressId" [_addresses]="_addresses" [resourceListingtypes]="resourceListingtypes"
+        [_commids]="_commids" [_typeids]="_typeids" (applyFilter)="applyFilter($event)"></ngx-search-filter>
+    </div>
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <div class="row justify-content-center padding-bottom-2em padding-adjustment">
+          <div class="col-10">
+            <input class="form-control" [value]="search1" #searchBox name ngxTypeahead [taItemTpl]="myTemp"
+              [taList]="resourcesSearch" (taSelected)="selectedStatic($event)" [taAllowEmpty]="true"
+              (keyup.enter)="search($event)" (keyup)="searchInputchange($event)" id="searchInput" #searchInput>
+          </div>
+
+          <div class="col-1">
+            <button nbButton (click)="getResourcesForMarket()"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <ng-template #myTemp let-item>
+          <div class="search-item">
+            {{item.result.name}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div *ngIf="resources?.length == 0" class="row">
+      <div class="col no-resources text-center">
+        <div>No resources are available.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let item of resources" class="col-12 col-sm-6 col-md-4 col-lg-3 min-width16em">
+        <ngx-item-card [id]="item.id" [name]="item.name" [type]="item.type" [price]="item.price" [offers]="item.offers"
+          [views]="item.views" [imagePath]="item.imageName" [isMigrated]="item.isMigrated"></ngx-item-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isUser" class="row justify-content-center align-items-center">
+  <div class="col-12">
+    <form [formGroup]="anonymousForm" (ngSubmit)="createAnonymousUser()">
+      <nb-card>
+        <nb-card-header>
+          Basic Information
+        </nb-card-header>
+        <nb-card-body class="min-height-26em">
+          <div class="row justify-content-center">
+            <div class=" col-12 col-md-6 col-xl-6 col-xs-12 col-lg-6">
+              <nb-card>
+                <nb-card-body>
+                  <div class="row justify-content-center">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="firstName" class="label">First Name</label>
+                        <input type="text" placeholder="enter first name" nbInput class="form-control"
+                          formControlName="firstName"
+                          [ngClass]="{'form-control-danger': anonymousForm.controls.firstName.invalid && (anonymousForm.controls.firstName.dirty || anonymousForm.controls.firstName.touched)}">
+                      </div>
+                      <div class="form-group">
+                        <label for="lastName" class="label">Last Name</label>
+                        <input type="text" placeholder="enter last name" nbInput class="form-control"
+                          formControlName="lastName"
+                          [ngClass]="{'form-control-danger': anonymousForm.controls.lastName.invalid && (anonymousForm.controls.lastName.dirty || anonymousForm.controls.lastName.touched)}">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="email" class="label">Email</label>
+                        <input type="text" placeholder="enter email" nbInput class="form-control"
+                          formControlName="email"
+                          [ngClass]="{'form-control-danger': anonymousForm.controls.email.invalid && (anonymousForm.controls.email.dirty || anonymousForm.controls.email.touched)}">
+                      </div>
+                      <div class="form-group">
+                        <label for="phone" class="label">Phone</label>
+                        <input type="text" placeholder="enter phone number" nbInput class="form-control"
+                          formControlName="phone"
+                          [ngClass]="{'form-control-danger': anonymousForm.controls.phone.invalid && (anonymousForm.controls.phone.dirty || anonymousForm.controls.phone.touched)}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="pull-right">
+                        <div class="form-group">
+                          <nb-checkbox (checkedChange)="toggle($event)"> <span>Terms & Conditions | <a href="#"
+                                target="_blank">Privacy</a></span>
+                          </nb-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isTermError" class="row">
+                    <div class="col">
+                      <label class="validation-message"> Please agree to Terms & Conditions.</label>
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+          </div>
+        </nb-card-body>
+        <nb-card-footer>
+          <button nbButton class="padding-right-1em">Proceed</button>
+          <button nbButton (click)="navigateBack()">Back</button>
+        </nb-card-footer>
+      </nb-card>
+    </form>
+  </div>
+</div>

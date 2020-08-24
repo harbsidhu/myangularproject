@@ -1,0 +1,15 @@
+<nb-card>
+  <nb-card-header>
+    Resource Out
+    <br/>
+    <label class="sub-header">List of resources to divert out of my supply chain</label>
+  </nb-card-header>
+  <nb-card-body>
+    <ag-grid-angular style="width: 100%; height: 15em;" class="ag-theme-balham" [rowData]="offerData" [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" rowHeight="40">
+    </ag-grid-angular>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton (click)="navigateToResources();">View All</button>
+  </nb-card-footer>
+</nb-card>

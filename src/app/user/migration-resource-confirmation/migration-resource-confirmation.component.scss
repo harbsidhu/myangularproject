@@ -1,0 +1,153 @@
+.text-center {
+    text-align: center;
+}
+
+.heading {
+    margin: 4em 5em 2em 5em;
+}
+
+.grey-text {
+    color: grey;
+    label{
+        margin-bottom: 2em;
+    }
+}
+
+.icon {
+    font-size: 8em;
+    color: #00ec57;
+    padding-bottom: 0.5em;
+}
+
+@media (min-width: 992px){
+    .resource-modal{
+        width: 96vw;
+    }
+
+    .resource-card{
+        height:86vh;
+    }
+}
+
+.resource-modal{
+    max-width: 100vw;
+}
+
+nb-card-header span{
+    font-size: 0.8em;
+    }
+
+    nb-accordion-item{
+        margin-bottom: 0.5em;
+    }
+
+    nb-accordion-item-header{
+        box-shadow: 2px 2px 4px #eaeaea;
+    }
+
+    nb-accordion-item-header .row{
+    width: 100%;
+    }
+
+    nb-accordion-item-header{
+        padding: 0.7em !important;
+        font-size: 0.8375em !important;
+    }
+
+    .border-right{
+         border-right:solid 1px #71d181;
+    }
+
+    .box-shadow-none { box-shadow: none !important; }
+    .background-transparent { background: transparent !important;}
+
+    .item-status-color{ color:#51ae61 }
+    .item-count-color{ color:#00a1ff }
+
+    .item-header-icon-color{ color:#60cc72 }
+
+    .item-links {margin-top: -.8em; font-size: 1em;}
+
+    //////////////////Modal CSS
+    ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-arrow {
+        color:#ffffff;
+        text-shadow: 0px 0px 5px #008000;
+    }
+
+    ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-image {
+        border: solid 4px #fff;
+    }
+
+    ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow {
+        color:#ffffff;
+        text-shadow: 0px 0px 5px #008000;
+    }
+    ngx-gallery /deep/ .ngx-gallery-image-wrapper{
+        border: solid 1px #eaeaea !important;
+    }
+    .gallery-border {
+        padding: .2em;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .title-spacing {
+        margin-bottom: 1em;
+        padding-bottom: 0.5em;
+    }
+    .top-border{
+        border-top: 2px solid #eaeaea;
+    }
+
+    .min-width-30em{
+        min-width: 30em;
+    }
+
+    .margin-top-08em{
+        margin-top: 0.8em;
+    }
+
+    .bidding-background{
+        background-color: #eaeaea;
+        padding: 1em;
+        margin-top: 4.2em;
+    }
+
+    .bottom-margin10{
+        margin-bottom: 10px;
+    }
+
+    .bottom-border1{
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .bottom-border2{
+        border-bottom: 2px solid #eaeaea;
+    }
+
+    .font-small {
+        font-size: .7em;
+        margin-bottom: 0;
+
+    }
+
+    .blue {
+        color: #5b7efc;
+    }
+    .row-height1-4em {
+        height: 1.4em;
+    }
+
+    nb-icon{
+        line-height: 0.8em;
+        margin-right: 0.4em;
+    }
+
+    .nav-label {
+        padding-top: 1em;
+        font-weight: 600;
+        color: #67df7c;
+        cursor: pointer;
+    }

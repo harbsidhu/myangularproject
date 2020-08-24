@@ -1,0 +1,529 @@
+<div *ngIf="!_paymentDone" class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card>
+    <nb-card-body>
+      <nb-stepper #stepper1>
+        <nb-step [stepControl]="firstForm" #PersonalStep label="Personal">
+          <form novalidate [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+            <nb-card>
+              <nb-card-header>
+                <h5>Personal Information</h5>
+              </nb-card-header>
+              <nb-card-body>
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="firstName" class="label">First Name</label>
+                      <input type="text" nbInput class="form-control" formControlName="firstName" [ngClass]="{'form-control-danger': firstForm.controls.firstName.invalid
+                            && (firstForm.controls.firstName.dirty || firstForm.controls.firstName.touched)}">
+                      <label class="validation-message" *ngIf="firstForm.controls.firstName.invalid
+                            && (firstForm.controls.firstName.dirty || firstForm.controls.firstName.touched)">
+                        First name is required
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label for="lastName" class="label">Last Name</label>
+                      <input type="text" nbInput class="form-control" id="lastName" formControlName="lastName"
+                        [ngClass]="{'form-control-danger': firstForm.controls.lastName.invalid &&
+                              (firstForm.controls.lastName.dirty || firstForm.controls.lastName.touched)}">
+                      <label class="validation-message" *ngIf="firstForm.controls.lastName.invalid
+                              && (firstForm.controls.lastName.dirty || firstForm.controls.lastName.touched)">
+                        Last name is required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="email" class="label">Email</label>
+                      <input type="text" nbInput class="form-control" formControlName="email" required
+                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [ngClass]="{'form-control-danger': firstForm.controls.email.invalid
+                                  && (firstForm.controls.email.dirty || firstForm.controls.email.touched)}">
+                      <label class="validation-message" *ngIf="firstForm.controls.email.invalid
+                                  && (firstForm.controls.email.dirty || firstForm.controls.email.touched)
+                                  && firstForm.controls.email.errors?.required">
+                        Email is required
+                      </label>
+                      <label class="validation-message" *ngIf="firstForm.controls.email.invalid
+                                && (firstForm.controls.email.dirty || firstForm.controls.email.touched)
+                                && firstForm.controls.email.errors?.pattern">
+                        Email is not correct format
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label for="personalContact" class="label">Personal Contact</label>
+                      <ngx-intl-tel-input [cssClass]="'form-control bg-color-intl'"
+                        [onlyCountries]="[CountryISO.Australia, CountryISO.NewZealand]"
+                        [enableAutoCountrySelect]="false" [enablePlaceholder]="false" [searchCountryFlag]="true"
+                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                        [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Australia" [maxLength]="10"
+                        [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="true"
+                        name="personalContact" formControlName="personalContact" id="personalContact"
+                        (keyup)=" ValidatePersonalContact();" [ngClass]="{'form-control-danger': (firstForm.controls.personalContact.invalid
+                    && (firstForm.controls.personalContact.dirty || firstForm.controls.personalContact.touched))
+                    || !this.isPersonalContactValid}"></ngx-intl-tel-input>
+                      <label class="validation-message" *ngIf="(firstForm.controls.personalContact.invalid
+                       && (firstForm.controls.personalContact.dirty || firstForm.controls.personalContact.touched))
+                       || !this.isPersonalContactValid">
+                        Personal contact is required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="password" class="label">Password</label>
+                      <input type="password" nbInput class="form-control" minlength="8" maxlength="64"
+                        formControlName="password" [ngClass]="{'form-control-danger': firstForm.controls.password.invalid
+                              && (firstForm.controls.password.dirty || firstForm.controls.password.touched)}">
+                      <label class="validation-message" *ngIf="firstForm.controls.password.invalid
+                              && (firstForm.controls.password.dirty || firstForm.controls.password.touched)">
+                        Password is required
+                      </label>
+                      <label class="validation-message" *ngIf="firstForm.controls.password.invalid
+                            && (firstForm.controls.password.errors?.minlength)
+                              && (firstForm.controls.password.dirty || firstForm.controls.password.touched)">
+                        Password must be between 8 to 64 Characters
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label for="confirmPassword" class="label">Confirm password</label>
+                      <input type="password" nbInput class="form-control" formControlName="confirmPassword"
+                        [ngClass]="{'form-control-danger': firstForm.controls.confirmPassword.invalid
+                              && (firstForm.controls.confirmPassword.dirty || firstForm.controls.confirmPassword.touched)}">
+                      <label class="validation-message" *ngIf="firstForm.controls.confirmPassword.invalid
+                              && (firstForm.controls.confirmPassword.dirty || firstForm.controls.confirmPassword.touched)
+                              && firstForm.controls.confirmPassword.errors?.required">
+                        Confirm password is required
+                      </label>
+                      <label class="validation-message" *ngIf="firstForm.controls.confirmPassword.invalid
+                              && (firstForm.controls.confirmPassword.dirty || firstForm.controls.confirmPassword.touched)
+                              && firstForm.controls.confirmPassword.errors?.MatchPassword">
+                        Passwords do not match
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+              <nb-card-footer>
+                <button nbButton (click)="selectPersonalStep" class="padding-right-1em">next </button>
+              </nb-card-footer>
+            </nb-card>
+          </form>
+        </nb-step>
+        <nb-step [stepControl]="secondForm" #CompanyStep label="Company">
+          <form novalidate #secondFormElement [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()"
+            class="step-container">
+            <nb-card>
+              <nb-card-header>
+                <h5>Company Information</h5>
+              </nb-card-header>
+              <nb-card-body>
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="abn" class="label">ABN</label>
+                      <input type="text" nbInput class="form-control" (change)="getABNDetails();" formControlName="abn"
+                        [ngClass]="{'form-control-danger': secondForm.controls.abn.invalid
+                              && (secondForm.controls.abn.dirty || secondForm.controls.abn.touched)}" />
+                      <label class="validation-message" *ngIf="secondForm.controls.abn.invalid
+                              && (secondForm.controls.abn.dirty || secondForm.controls.abn.touched)">
+                        ABN is required
+                      </label>
+                     <div>{{ABNresponse}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="companyName" class="label">Company Name</label>
+                      <input readonly type="text" nbInput class="form-control" formControlName="companyName" [ngClass]="{'form-control-danger': secondForm.controls.companyName.invalid
+                              && (secondForm.controls.companyName.dirty || secondForm.controls.companyName.touched)}">
+                      <label class="validation-message" *ngIf="secondForm.controls.companyName.invalid
+                              && (secondForm.controls.companyName.dirty || secondForm.controls.companyName.touched)">
+                        Company Name is required
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label for="noOfEmployees" class="label">No. of employees</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <nb-select selected="1" formControlName="noOfEmployees"
+                            placeholder="Select total employee count" width="100%"
+                            (selectedChange)="onNoOfEmployeeChange($event)"
+                            [ngClass]="{'form-control-danger': secondForm.controls.noOfEmployees.invalid
+                                && (secondForm.controls.noOfEmployees.dirty || secondForm.controls.noOfEmployees.touched)}">
+                            <nb-option *ngFor="let item of _noOfEmployeesfiltered" [value]="item.id">{{item.name}}</nb-option>
+                          </nb-select>
+                          <label class="validation-message" *ngIf="secondForm.controls.noOfEmployees.invalid
+                          && (secondForm.controls.noOfEmployees.dirty || secondForm.controls.noOfEmployees.touched)">
+                            Number of employees is required
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="jobRole" class="label">Job role</label>
+                      <input type="text" nbInput class="form-control" formControlName="jobRole" [ngClass]="{'form-control-danger': secondForm.controls.jobRole.invalid
+                              && (secondForm.controls.jobRole.dirty || secondForm.controls.jobRole.touched)}">
+                      <label class="validation-message" *ngIf="secondForm.controls.jobRole.invalid
+                              && (secondForm.controls.jobRole.dirty || secondForm.controls.jobRole.touched)">
+                        Job role is required
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="council" class="label">Council</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <nb-select disabled selected="1" formControlName="council" placeholder="Select council"
+                            width="100%" (selectedChange)="onCouncilChange($event)" [ngClass]="{'form-control-danger': secondForm.controls.council.invalid
+                                && (secondForm.controls.council.dirty || secondForm.controls.council.touched)}">
+                            <nb-option *ngFor="let item of _councils" [value]="item.id">{{item.name}}</nb-option>
+                          </nb-select>
+                          <label class="validation-message" *ngIf="secondForm.controls.council.invalid
+                              && (secondForm.controls.council.dirty || secondForm.controls.council.touched)">
+                            Council is required
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="division" class="label">Industry (ANZSIC) </label>
+                      <div class="row">
+                        <div class="col-12">
+                          <nb-select formControlName="division" (selectedChange)="getSubDivisions($event);"
+                            placeholder="Select division" width="100%" [ngClass]="{'form-control-danger': secondForm.controls.division.invalid
+                                && (secondForm.controls.division.dirty || secondForm.controls.division.touched)}">
+                            <nb-option *ngFor="let item of _divisions" [value]="item.id">{{item.name}}</nb-option>
+                          </nb-select>
+                          <label class="validation-message" *ngIf="secondForm.controls.division.invalid
+                          && (secondForm.controls.division.dirty || secondForm.controls.division.touched)">
+                            Industry is required
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="subDivision " class="label">Subdivision </label>
+                      <div class="row">
+                        <div class="col-12">
+                          <nb-select formControlName="subDivision" placeholder="Select subdivision" width="100%"
+                            (selectedChange)="onSubDivisionChange($event)"
+                            [ngClass]="{'form-control-danger': secondForm.controls.subDivision.invalid
+                                && (secondForm.controls.subDivision.dirty || secondForm.controls.subDivision.touched)}">
+                            <nb-option *ngFor="let item of _subDivisions" [value]="item.id">{{item.name}}</nb-option>
+                          </nb-select>
+                          <label class="validation-message" *ngIf="secondForm.controls.subDivision.invalid
+                          && (secondForm.controls.subDivision.dirty || secondForm.controls.subDivision.touched)">
+                            Subdivision is required
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="radioGroupValue" class="label width-100pct">Are you a registered recycling company? </label>
+                      <nb-radio-group class="width-100pct" formControlName="recycler" [(value)]="selectedOption"
+                        [ngClass]="{'form-control-danger': secondForm.controls.recycler.invalid
+                              && (secondForm.controls.recycler.dirty || secondForm.controls.recycler.touched)}">
+                        <nb-radio #radioYes value="1">Yes</nb-radio>
+                        <nb-radio #radioNo value="2">No</nb-radio>
+                      </nb-radio-group>
+                    </div>
+                    <label class="validation-message" *ngIf="secondForm.controls.recycler.invalid
+                    && (secondForm.controls.recycler.dirty || secondForm.controls.recycler.touched)">
+                      Recycler is required
+                    </label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="companyPhone" class="label">Company Phone</label>
+                      <ngx-intl-tel-input [cssClass]="'form-control bg-color-intl'"
+                        [onlyCountries]="[CountryISO.Australia, CountryISO.NewZealand]"
+                        [enableAutoCountrySelect]="false" [enablePlaceholder]="false" [searchCountryFlag]="true"
+                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                        [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Australia" [maxLength]="15"
+                        [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="true"
+                        name="companyPhone" formControlName="companyPhone" id="companyPhone"
+                        (keyup)=" ValidateCompanyPhone();" [ngClass]="{'form-control-danger': (secondForm.controls.companyPhone.invalid
+                        && (secondForm.controls.companyPhone.dirty || secondForm.controls.companyPhone.touched))
+                        || !this.isCompanyPhoneValid}"></ngx-intl-tel-input>
+                      <label class="validation-message" *ngIf="(secondForm.controls.companyPhone.invalid
+                        && (secondForm.controls.companyPhone.dirty || secondForm.controls.companyPhone.touched))
+                        || !this.isCompanyPhoneValid">
+                        Company phone is required
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label for="primaryAddress" class="label">Primary address</label>
+                      <input type="search" nbInput class="form-control" formControlName="primaryAddress" #primaryAddress
+                        id="primaryAddress" (change)="statePopulated();"
+                        [ngClass]="{'form-control-danger': secondForm.controls.primaryAddress.invalid
+                              && (secondForm.controls.primaryAddress.dirty || secondForm.controls.primaryAddress.touched)}">
+                      <label class="validation-message" *ngIf="secondForm.controls.primaryAddress.invalid
+                          && (secondForm.controls.primaryAddress.dirty || secondForm.controls.primaryAddress.touched)">
+                        Primary Address is required
+                      </label>
+                      <input type="hidden" #prmLine1 id="prmLine1" name="prmLine1">
+                      <input type="hidden" #prmLine2 id="prmLine2" name="prmLine2">
+                      <input type="hidden" #prmLat id="prmLat" name="prmLat">
+                      <input type="hidden" #prmLon id="prmLon" name="prmLon">
+                      <input type="hidden" #prmPostCode id="prmPostCode" name="prmPostCode">
+                      <input type="hidden" #prmSuburb id="prmSuburb" name="prmSuburb">
+                      <input type="hidden" #prmState id="prmState" name="prmState">
+                    </div>
+                    <div class="form-group">
+                      <label class="label">Additional locations.</label>
+                      <input type="search" nbInput class="form-control" formControlName="additionalAddress"
+                        #additionalAddress id="additionalAddress">
+                      <div class="row margin-top-0-3em">
+                        <div class="col">
+                          <span class="add-address-message" *ngIf="additionalAddresses.length == 0">No Address
+                            Records.</span>
+                        </div>
+                        <div class="col">
+                          <div class="add-address-link pull-right cursor-pointer" (click)="addNewAddressRow()">Add</div>
+                        </div>
+                      </div>
+                      <br>
+                      <div *ngFor="let item of additionalAddresses;let i= index" #addressItem>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-11">
+                              <span class="add-address-Item">{{item.fullAddress}}</span>
+                            </div>
+                            <div class="col-1">
+                              <div (click)="deleteAddressRow(item.fullAddress)">
+                                <i class="far fa-trash-alt image-delete pull-right address-delete"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <input type="hidden" #adnLine1 id="adnLine1" name="adnLine1">
+                      <input type="hidden" #adnLine2 id="adnLine2" name="adnLine2">
+                      <input type="hidden" #adnLat id="adnLat" name="adnLat">
+                      <input type="hidden" #adnLon id="adnLon" name="adnLon">
+                      <input type="hidden" #adnPostCode id="adnPostCode" name="adnPostCode">
+                      <input type="hidden" #adnSuburb id="adnSuburb" name="adnSuburb">
+                      <input type="hidden" #adnState id="adnState" name="adnState">
+
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+              <nb-card-footer>
+                <button nbButton type="button" nbStepperPrevious class="padding-right-1em">prev</button>
+                <button nbButton type="button" (click)="onSecondSubmit()">next</button>
+              </nb-card-footer>
+            </nb-card>
+          </form>
+        </nb-step>
+        <nb-step #summaryStep label="Summary">
+          <div class="step-container">
+            <nb-card>
+              <nb-card-header>
+                <h5>Summary</h5>
+              </nb-card-header>
+              <nb-card-body>
+                <h6>Personal Information<span class="profile-edit-span" (click)="selectPersonalStep()">Edit</span></h6>
+                <div class="row">
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label for="firstName" class="label">First Name</label>
+                      <br />
+                      <label for="firstName">{{firstForm.controls.firstName.value}}</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label for="lastName" class="label">Last Name</label>
+                      <br />
+                      <label for="lastname">{{firstForm.controls.lastName.value}}</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label for="email" class="label">Email</label>
+                      <br />
+                      <label for="email">{{firstForm.controls.email.value}}</label>
+                    </div>
+                  </div>
+                </div>
+                <h6 class="padding-top-2em">Company Information <span class="profile-edit-span"
+                    (click)="selectCompanyStep()">Edit</span></h6>
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="companyName" class="label">Company Name</label>
+                      <br />
+                      <label for="companyName">{{secondForm.controls.companyName.value}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="abn" class="label">ABN</label>
+                      <br />
+                      <label>{{secondForm.controls.abn.value}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="noOfEmployees" class="label">No. of employees</label>
+                      <br />
+                      <label>{{_noOfEmployeesDisplay?.name}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="jobRole" class="label">Job role</label>
+                      <br />
+                      <label>{{secondForm.controls.jobRole.value}}</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label class="label">Council</label>
+                      <br />
+                      <label>{{_councilDisplay?.name}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="industry" class="label">Industry (ANZSIC) </label>
+                      <br />
+                      <label>{{_divisionDisplay?.name}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="subDivision " class="label">Subdivision </label>
+                      <br />
+                      <label>{{_subDivisionDisplay?.name}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="subDivision " class="label">Are you a registered recycling company? </label>
+                      <br />
+                      <label>{{secondForm.controls.recycler.value=='1'?'Yes':'No'}}</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                      <label for="phone" class="label">Phone No.</label>
+                      <br />
+                      <label>{{secondForm.value.companyPhone?.dialCode+ ' ' + secondForm.value.companyPhone?.nationalNumber}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="primaryAddress" class="label">Primary address</label>
+                      <br />
+                      <label>{{this.primaryAddressControl?.nativeElement.value}}</label>
+                    </div>
+                    <div class="form-group">
+                      <label for="additionalAddress" class="label">Additional locations.</label>
+                      <br />
+                      <label *ngFor="let item of additionalAddresses">{{item.fullAddress}}</label>
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+              <nb-card-footer>
+                <button nbButton nbStepperPrevious class="padding-right-1em">prev</button>
+                <button nbButton (click)="onThirdSubmit()">Confirm</button>
+              </nb-card-footer>
+            </nb-card>
+          </div>
+        </nb-step>
+        <nb-step [stepControl]="forthForm" #paymentStep label="Confirmation">
+          <form novalidate #secondFormElement [formGroup]="forthForm" class="step-container">
+          <div class=" row step-container justify-content-center">
+            <div class="col-sm-12 col-md-10 col-lg-6 justify-content-center">
+              <nb-card>
+                <nb-card-header class="Subscription-card-header justify-content-center">
+                  Subscription Benefits
+                </nb-card-header>
+                <nb-card-body class="justify-content-center">
+                  <ul class="subscription-ul">
+                    <li><i class="far fa-check-circle icon-color"></i>Unlimited resource and waste uploads</li>
+                    <li><i class="far fa-check-circle icon-color"></i>Unlimited technical support</li>
+                    <li><i class="far fa-check-circle icon-color"></i>ASPIRE member certification</li>
+                    <li><i class="far fa-check-circle icon-color"></i>Access to ASPIRE meetups</li>
+                    <li><i class="far fa-check-circle icon-color"></i>Promotional material for your workplace</li>
+                    <li><i class="far fa-check-circle icon-color"></i>Access to view ASPIRE case studies</li>
+                    <li><i class="far fa-check-circle icon-color"></i>Feature case studies in the ASPIRE newsletters</li>
+                  </ul>
+                  <div class="terms-container">
+                    <nb-checkbox (checkedChange)="toggleTermsCheckBox($event)"> I understand & agree to the <span
+                        class="nav-label" (click)="openTnC();">Terms & Conditions </span> |
+                      <span class="nav-label" (click)="openPrivacy();"> Privacy</span> </nb-checkbox>
+                  </div>
+                </nb-card-body>
+                <nb-card-footer class="justify-content-center subscription-card-footer">
+                  <label *ngIf="isContactSellerForSubscription && !isZeroSubscription">Enterprise Account</label>
+                  <label *ngIf="!isContactSellerForSubscription && !isZeroSubscription">AUD
+                    ${{this._subscription?.exGst}} + GST </label>
+                  <label *ngIf="isZeroSubscription">Free Account</label>
+                </nb-card-footer>
+              </nb-card>
+            </div>
+          </div>
+          <div *ngIf="!isContactSellerForSubscription && !isZeroSubscription" class="row bottom-margin justify-content-center">
+            <div class="col-md-3 col-sm-6">
+            <input [disabled]="isZeroSubscription" placeholder="enter promo code"  type="text" nbInput class="form-control" formControlName="promoCode">
+          </div>
+        <div class="col-md-3 col-sm-6">
+            <button [disabled]="isZeroSubscription" nbButton
+              (click)="checkPromo()">Apply Promo</button>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <button [disabled]="!termAgreed" nbButton
+              (click)="paymentOrContact()">{{isContactSellerForSubscription ? 'Contact' : 'Subscribe'}}</button>
+          </div>
+          <div class="row justify-content-center">
+            <label class="no-proceed-link" (click)="navigateToHome();">I do not wish to proceed</label>
+          </div>
+          </form>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+</div>
+<div *ngIf="_paymentDone">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-8 col-xxxl-8 col-sm-12">
+      <nb-card>
+        <nb-card-header>
+          <h1>Welcome to ASPIRE</h1>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row>">
+            <h6>Thank you, we have received payment for your ASPIRE subscription.</h6>
+            <br />
+            <br />
+          </div>
+          <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+              <h5 class="heading-bottom">Billed to:</h5>
+              <label>{{firstForm.controls.firstName.value}} {{firstForm.controls.lastName.value}}</label>
+              <br />
+              <label>{{primaryAddressString}}</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <h5 class="heading-bottom">Subscription details</h5>
+              <label>ASPIRE Business subscription</label>
+              <br />
+              <label>Subtotal: ${{_subscription?.exGst}}.00 AUD</label>
+              <br />
+              <label>GST: ${{( _subscription?.gst).toFixed(2)}} AUD</label>
+              <br />
+              <strong>Total: </strong><label> ${{(_subscription?.amount).toFixed(2)}} AUD</label>
+            </div>
+          </div>
+          <div class="row margin-top-2em">
+            <div class="col-md-6 col-sm-12">
+              <strong *ngIf="!isZeroSubscription">Transaction Id:</strong> <br /><label> {{_transId}}</label>
+              <br />
+              <label *ngIf="!isZeroSubscription" class="info">If you require any assistance or if there are any payment
+                issues,
+                send us an email <a href="mailto:circular@aspiresme.com">ASPIRE</a>
+                and reference your Transaction Id.</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <button nbButton (click)="navigateToConfirmation()">Continue</button>
+            </div>
+          </div>
+          <div class="row footnote">
+            <div class="col">
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

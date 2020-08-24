@@ -1,0 +1,501 @@
+<div class="row">
+    <div class="col-12" id="Resource" *ngIf="isFirst">
+        <nb-card class="min-height-80vh">
+            <nb-card-body>
+                <div class="row margin-top-2em">
+                    <h5 class="text-center width-100">
+                        What resource would you like to divert?</h5>
+                </div>
+                <div class="row justify-content-center min-height-26em">
+                    <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6 justify-content-center">
+                        <div class="row  margin-top-8em">
+                            <div class="col-12 col-sm-12 col-md-11  margin-top-1em">
+                                <angular2-multiselect [data]="resources" [(ngModel)]="_selectedResource"
+                                    [settings]="dropdownSettings" (onDeSelectAll)="onResourceReset($event)"
+                                    (onSelect)="onResourceSelect($event)">
+                                </angular2-multiselect>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-1 margin-top-1em">
+                                <button class="pull-right" *ngIf="_selectedResource !== undefined" nbButton
+                                    (click)="moveToSecond();">Go</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <form [formGroup]="resourceForm" class="width-100pct" (ngSubmit)="createResourcelisting(files)">
+        <div class="col-12" id="Disposal" *ngIf="isSecond">
+            <nb-card class="min-height-80vh">
+                <nb-card-body>
+                    <div class="row margin-top-2em">
+                        <h5 class="text-center width-100">
+                            How would you like to divert this resource?</h5>
+                    </div>
+                    <div class="row justify-content-center min-height-22em">
+                        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6 justify-content-center">
+                            <nb-select formControlName="resourceListType" class="select-adjust margin-top-8em"
+                                (selectedChange)="onDisposalTypeChange($event);" width="100%" [ngClass]="{'form-control-danger': resourceForm.controls.resourceListType.invalid
+            && (resourceForm.controls.resourceListType.dirty || resourceForm.controls.resourceListType.touched)}">
+                                <nb-option *ngFor="let item of _resourceListTypes" [value]="item.id">{{item.name}}
+                                </nb-option>
+                            </nb-select>
+                            <label class="validation-message" *ngIf="resourceForm.controls.resourceListType.invalid
+            && (resourceForm.controls.resourceListType.dirty || resourceForm.controls.resourceListType.touched)">
+                                Disposal type is required
+                            </label>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6">
+                            <button class="pull-left" nbButton (click)="moveToFirst();">Back</button>
+                            <button class="pull-right" *ngIf="resourceForm.controls.resourceListType.valid" nbButton
+                                (click)="moveToFinal();">Next</button>
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </div>
+        <div class="col-12" id="finalForm" *ngIf="isFinal">
+            <nb-card>
+                <nb-card-header>
+                    Listing: Details
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="resource" nbTooltipPlacement="bottom" nbTooltip="Resource to divert"
+                                    class="label">Resource</label>
+                                <span class="edit-link pull-right" (click)="moveToFirst();">Edit</span>
+                                <input type="text" nbTooltipPlacement="bottom" nbTooltip="Resource to divert" nbInput
+                                    class="form-control" formControlName="resource" [value]="_selectedResource[0]?.name"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="attribute" nbTooltipPlacement="bottom"
+                                    nbTooltip="Resource has the following properties, select which applies"
+                                    class="label">Attribute</label>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <nb-select multiple nbTooltipPlacement="bottom"
+                                            (selectedChange)="onAttributeSelected($event)" formControlName="attribute"
+                                            nbTooltip="Resource has the following properties, select which applies"
+                                            class="width-adjust width-100pct" [(selected)]="attributes"
+                                            [ngClass]="{'form-control-danger': resourceForm.controls.attribute.invalid
+                                  && (resourceForm.controls.attribute.dirty || resourceForm.controls.attribute.touched)}">
+                                            <nb-option *ngFor="let item of _attributes" [value]="item.id">{{item.name}}
+                                            </nb-option>
+                                        </nb-select>
+                                        <label class="validation-message" *ngIf="resourceForm.controls.attribute.invalid
+                            && (resourceForm.controls.attribute.dirty || resourceForm.controls.attribute.touched)">
+                                            Attribute is required
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="listingDuration" nbTooltipPlacement="bottom"
+                                    nbTooltip="Please select the start and finish date of your resource listing"
+                                    class="label">Listing Duration (from - to)</label>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input nbInput placeholder="Pick Date Range" formControlName="listingDuration"
+                                            [(ngModel)]="_listingDuration" [nbDatepicker]="formpicker"
+                                            class="width-adjust width-100pct">
+                                        <nb-rangepicker #formpicker></nb-rangepicker>
+                                        <label class="validation-message"
+                                            *ngIf="(resourceForm.controls.listingDuration.invalid 
+                            && (resourceForm.controls.listingDuration.dirty || resourceForm.controls.listingDuration.touched)) || listingDurationInvalid">
+                                            Listing duration is required
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="quantity" nbTooltipPlacement="bottom"
+                                    nbTooltip="Amount of resources to divert" class="label">Quantity</label>
+                                <input type="text" nbInput ngxTwodecimalnumber class="form-control"
+                                    formControlName="quantity" nbTooltipPlacement="bottom"
+                                    nbTooltip="Amount of resources to divert"
+                                    [ngClass]="{'form-control-danger': resourceForm.controls.quantity.invalid
+                                  && (resourceForm.controls.quantity.dirty || resourceForm.controls.quantity.touched)}">
+                                <label class="validation-message" *ngIf="resourceForm.controls.quantity.invalid
+                                  && (resourceForm.controls.quantity.dirty || resourceForm.controls.quantity.touched)">
+                                    Quantity is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="unit" nbTooltipPlacement="bottom" nbTooltip="Resource is measured in unit"
+                                    class="label">Unit</label>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <nb-select formControlName="unit" class="width-adjust width-100pct"
+                                            nbTooltipPlacement="bottom" nbTooltip="Resource is measured in unit"
+                                            [ngClass]="{'form-control-danger': resourceForm.controls.unit.invalid
+                                && (resourceForm.controls.unit.dirty || resourceForm.controls.unit.touched)}">
+                                            <nb-option *ngFor="let item of _units" [value]="item.id">{{item.name}}
+                                            </nb-option>
+                                        </nb-select>
+                                        <label class="validation-message" *ngIf="resourceForm.controls.unit.invalid
+                          && (resourceForm.controls.unit.dirty || resourceForm.controls.unit.touched)">
+                                            Unit is required
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="frequency" nbTooltipPlacement="bottom"
+                                    nbTooltip="Resource is available on a periodic basis"
+                                    class="label">Frequency</label>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <nb-select formControlName="frequency" class="width-adjust width-100pct"
+                                            nbTooltipPlacement="bottom"
+                                            nbTooltip="Resource is available on a periodic basis"
+                                            [ngClass]="{'form-control-danger': resourceForm.controls.frequency.invalid
+                                && (resourceForm.controls.frequency.dirty || resourceForm.controls.frequency.touched)}">
+                                            <nb-option *ngFor="let item of this._frequencies" [value]="item.id">
+                                                {{item.name}}</nb-option>
+                                        </nb-select>
+                                        <label class="validation-message" *ngIf="resourceForm.controls.frequency.invalid
+                          && (resourceForm.controls.frequency.dirty || resourceForm.controls.frequency.touched)">
+                                            Frequency is required
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="location" nbTooltipPlacement="bottom"
+                                    nbTooltip="Resource is available from following location"
+                                    class="label">Location</label>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <nb-select formControlName="location" class="width-adjust width-100pct"
+                                            nbTooltipPlacement="bottom"
+                                            nbTooltip="Resource is available from following location" [ngClass]="{'form-control-danger': resourceForm.controls.location.invalid
+                                && (resourceForm.controls.location.dirty || resourceForm.controls.location.touched)}">
+                                            <nb-option *ngFor="let item of _addresses" [value]="item.id">{{item.name}}
+                                            </nb-option>
+                                        </nb-select>
+                                        <label class="validation-message" *ngIf="resourceForm.controls.location.invalid
+                          && (resourceForm.controls.location.dirty || resourceForm.controls.location.touched)">
+                                            Location is required
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-8">
+                            <div class="form-group">
+                                <label for="description" nbTooltipPlacement="bottom"
+                                    nbTooltip="Briefly describe the contents of your resource"
+                                    class="label">Description</label>
+                                <input type="text" nbInput class="form-control description-adjust"
+                                    formControlName="description" nbTooltipPlacement="bottom"
+                                    nbTooltip="Briefly describe the contents of your resource"
+                                    [ngClass]="{'form-control-danger': resourceForm.controls.description.invalid
+                                      && (resourceForm.controls.description.dirty || resourceForm.controls.description.touched)}">
+                                <label class="validation-message"
+                                    *ngIf="resourceForm.controls.description.invalid
+                                      && (resourceForm.controls.description.dirty || resourceForm.controls.description.touched)">
+                                    Description is required
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card *ngIf="_showSellingControls">
+                <nb-card-header>
+                    Pricing: Sell Resource
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="sellListPrice" nbTooltipPlacement="bottom" nbTooltip="Set buy it now price"
+                                    class="label">Resource List Price (AU $)</label>
+                                <input type="text" nbInput ngxTwodecimalnumber class="form-control"
+                                    formControlName="sellListPrice" nbTooltipPlacement="bottom"
+                                    nbTooltip="Set buy it now price"
+                                    [ngClass]="{'form-control-danger': resourceForm.controls.sellListPrice.invalid
+                                      && (resourceForm.controls.sellListPrice.dirty || resourceForm.controls.sellListPrice.touched)}">
+                                <label class="validation-message"
+                                    *ngIf="resourceForm.controls.sellListPrice.invalid
+                                      && (resourceForm.controls.sellListPrice.dirty || resourceForm.controls.sellListPrice.touched)">
+                                    Resource List Price is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="sellNegotiable" nbTooltipPlacement="bottom"
+                                    nbTooltip="Buyer can make you an offer" class="label">Negotiable</label>
+                                <br />
+                                <ui-switch formControlName="sellNegotiable" checkedLabel="on"
+                                    nbTooltipPlacement="bottom" nbTooltip="Buyer can make you an offer"
+                                    uncheckedLabel="off"><i class="fa fa-check"></i></ui-switch>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card *ngIf="_showFreeControls">
+                <nb-card-header>
+                    Pricing: Resource is free
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="freeListPrice" nbTooltipPlacement="bottom"
+                                    nbTooltip="This resource is listed for free" class="label">Resource List Price (AU
+                                    $)</label>
+                                <input type="text" nbTooltipPlacement="bottom"
+                                    nbTooltip="This resource is listed for free" nbInput class="form-control"
+                                    formControlName="freeListPrice" text="Free" readonly />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="freeValue" nbTooltipPlacement="bottom"
+                                    nbTooltip="Confidential. For research purposes" class="label">Approx. Resource Value
+                                    (AU $)</label>
+                                <input type="text" nbTooltipPlacement="bottom" ngxTwodecimalnumber
+                                    nbTooltip="Confidential. For research purposes" nbInput class="form-control"
+                                    formControlName="freeValue"
+                                    [ngClass]="{'form-control-danger': resourceForm.controls.freeValue.invalid
+                                        && (resourceForm.controls.freeValue.dirty || resourceForm.controls.freeValue.touched)}">
+                                <label class="validation-message"
+                                    *ngIf="resourceForm.controls.freeValue.invalid
+                                        && (resourceForm.controls.freeValue.dirty || resourceForm.controls.freeValue.touched)">
+                                    Approx. Resource Value is required
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card *ngIf="_showPayingControls">
+                <nb-card-header>
+                    Pricing: Paying for disposal
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="disposalListPrice" nbTooltipPlacement="bottom"
+                                    nbTooltip="You will pay for the disposal of resource" class="label">Payment for
+                                    Disposal (AU
+                                    $)</label>
+                                <input type="text" nbTooltipPlacement="bottom" ngxTwodecimalnumber
+                                    nbTooltip="You will pay for the disposal of resource" nbInput class="form-control"
+                                    formControlName="disposalListPrice"
+                                    [ngClass]="{'form-control-danger': resourceForm.controls.disposalListPrice.invalid
+                                      && (resourceForm.controls.disposalListPrice.dirty || resourceForm.controls.disposalListPrice.touched)}">
+                                <label class="validation-message"
+                                    *ngIf="resourceForm.controls.disposalListPrice.invalid
+                                      && (resourceForm.controls.disposalListPrice.dirty || resourceForm.controls.disposalListPrice.touched)">
+                                    Payment for Disposal Price is required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="disposalValue" nbTooltipPlacement="bottom"
+                                    nbTooltip="Confidential. For research purposes" class="label">Approx. Resource Value
+                                    (AU $)</label>
+                                <input type="text" nbInput class="form-control" ngxTwodecimalnumber
+                                    formControlName="disposalValue" nbTooltipPlacement="bottom"
+                                    nbTooltip="Confidential. For research purposes"
+                                    [ngClass]="{'form-control-danger': resourceForm.controls.disposalValue.invalid
+                                        && (resourceForm.controls.disposalValue.dirty || resourceForm.controls.disposalValue.touched)}">
+                                <label class="validation-message"
+                                    *ngIf="resourceForm.controls.disposalValue.invalid
+                                        && (resourceForm.controls.disposalValue.dirty || resourceForm.controls.disposalValue.touched)">
+                                    Approx. Resource Value is required
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card>
+                <nb-card-header nbTooltipPlacement="bottom" nbTooltip="Drag and Drop or click button to upload images">
+                    Add photos
+                </nb-card-header>
+                <nb-card-body>
+                    <ngfFormData [files]="files" postName="file" [(FormData)]="sendableFormData"></ngfFormData>
+                    <ngfUploadStatus [(percent)]="progress" [httpEvent]="httpEvent"></ngfUploadStatus>
+                    <div class="row justify-content-center">
+                        <div class="inline-block">
+                            <div ngfDrop multiple="1" selectable="1" [(validDrag)]="validComboDrag" [(files)]="files"
+                                accept="image/gif,image/png,image/jpeg" [maxSize]="maxSize"
+                                [(lastInvalids)]="lastInvalids" [(dragFiles)]="dragFiles" class="well my-drop-zone"
+                                [class.invalid-drag]="validComboDrag===false" [class.valid-drag]="validComboDrag"
+                                (filesChange)="lastFileAt=getDate()" [fileDropDisabled]="fileDropDisabled">
+                                <div class="fileupload-div-outer">
+                                    <div class="fileupload-div">
+                                        <label><i class="fas fa-cloud-upload-alt fileupload-icon"></i></label>
+                                        <br />
+                                        <label class="fileupload-top-line">Drag and drop files here</label>
+                                        <br />
+                                        <label class="fileupload-middle-line">or</label>
+                                        <br />
+                                        <button nbButton>Browse Files</button>
+                                        <div class="d-none d-sm-block mt-2">
+                                            <button nbButton (click)="openCamera();$event.stopPropagation();">Camera</button>
+                                        </div>
+
+                                        <br />
+                                        <br /><label class="fileupload-bottom-line">There is a maximum of 3 images with
+                                            a maxiumum of 5mb per image.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="fileMaxError" class="row justify-content-center">
+                        <label class="validation-message"> Please upload a maximum of three images (Each image must be a
+                            maximum of 5mb).</label>
+                    </div>
+                    <div *ngIf="fileMinError" class="row justify-content-center">
+                        <label class="validation-message">Please upload at least one image.</label>
+                    </div>
+                    <div class="row justify-content-center padding-1em ">
+                        <div [ngClass]="(fileMaxError)?'image-error ':''"
+                            class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 padding-1em">
+                            <table class="image-table">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of files;let i=index">
+                                        <td>
+                                            <div *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0">
+                                                <div class="previewIcon" [ngfBackground]="item"></div>
+                                            </div>
+                                        </td>
+                                        <td nowrap>
+                                            {{ item.size/1024/1024 | number:'.2' }} MB
+                                        </td>
+                                        <td nowrap class="text-right">
+                                            <div (click)="files.splice(i,1)">
+                                                <i class="far fa-trash-alt image-delete"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="lastInvalids?.length > 0 " class="row justify-content-center">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 image-error padding-1em">
+                            <div>
+                                <label class="validation-message"> *Following files wont be uploaded as they might not
+                                    be images files
+                                    or exceeds 5mb size.</label>
+                            </div>
+                            <table class="image-table">
+                                {{lastInvalids.length}}
+                                <tbody>
+                                    <tr *ngFor="let item of lastInvalids;let i=index">
+                                        <td>
+                                            <div
+                                                *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.file.type)>=0">
+                                                <div class="previewIcon" [ngfBackground]="item.File"></div>
+                                            </div>
+                                            <strong>{{ item.file.name }}</strong>
+                                        </td>
+                                        <td nowrap>
+                                            {{ item.file.size/1024/1024 | number:'.2' }} MB
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center padding-1em ">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 padding-1em">
+                            <table class="image-table">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of _existingResourceListing.resourceImages;let i=index">
+                                        <td>
+                                            <div class="previewIcon" [style.background-image]="item.url"></div>
+                                        </td>
+                                        <td nowrap>
+                                            <!-- {{ item.size/1024/1024 | number:'.2' }} MB -->
+                                        </td>
+                                        <td nowrap class="text-right">
+                                            <div>
+                                                <i class="far fa-trash-alt image-delete"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card>
+                <nb-card-header>
+                    Transaction Terms & Conditions
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col">
+                            By clicking 'I Accept' here below, you confirm that you have read the ASPIRE <span
+                                class="nav-label" (click)="openTnC();">terms and conditions</span> ,
+                            that you understand them and that you agree not to use the ASPIRE Marketplace, its Services,
+                            the Content,
+                            or any part thereof in any manner not expressly permitted by this Agreement.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col margin-top-1em margin-bottom-1em">
+                            <nb-checkbox (checkedChange)="toggle($event)">I Accept</nb-checkbox>
+                        </div>
+                    </div>
+                    <div *ngIf="isTermError" class="row">
+                        <div class="col">
+                            <label class="validation-message"> Please agree to Terms & Conditions.</label>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <label class="validation-message" *ngIf="resourceForm.invalid
+          && (resourceForm.dirty || resourceForm.touched)">
+                        Some of the fileds require attention.
+                    </label>
+                    <br />
+                    <button nbButton (click)="moveToSecond();">Back</button>
+                    <button *ngIf="!isEditView" type="submit" class="margin-left-1em" nbButton>List It</button>
+                    <button *ngIf="isEditView" type="submit" class="margin-left-1em" nbButton>Update</button>
+                    <label *ngIf="isProcessing">processing......</label>
+                </nb-card-footer>
+            </nb-card>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,89 @@
+<div class="row heading-padding">
+  <div class="col">
+    <h5 class="margin-left-0-6em header-color">Contact</h5>
+  </div>
+</div>
+<div class="row padding-2rem">
+  <div class="col">
+    <form novalidate [formGroup]="contactFrom" (ngSubmit)="contactSubmit()">
+      <div class="row">
+        <div class="col-xl-3 col-lg-5 col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label for="name" class=" label font-black">Name</label>
+            <input type="text" nbInput class="form-control max-width-100pct" formControlName="name" [ngClass]="{'form-control-danger': contactFrom.controls.name.invalid
+                       && (contactFrom.controls.name.dirty
+                       || contactFrom.controls.name.touched)}">
+            <label class="validation-message" *ngIf="contactFrom.controls.name.invalid
+                      && (contactFrom.controls.name.dirty || contactFrom.controls.name.touched)">
+              Name is required
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-5 col-xs-12 col-sm-6">
+
+          <div class="form-group">
+            <label for="companyName" class=" label font-black">Company Name</label>
+            <input type="text" nbInput class="form-control max-width-100pct" formControlName="companyName" [ngClass]="{'form-control-danger': contactFrom.controls.companyName.invalid
+                       && (contactFrom.controls.companyName.dirty
+                       || contactFrom.controls.companyName.touched)}">
+            <label class="validation-message" *ngIf="contactFrom.controls.companyName.invalid
+                      && (contactFrom.controls.companyName.dirty || contactFrom.controls.companyName.touched)">
+              Company Name is required
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-5 col-xs-12 col-sm-6">
+
+          <div class="form-group">
+            <label for="email" class=" label font-black">Email</label>
+            <input type="text" nbInput class="form-control max-width-100pct" formControlName="email" [ngClass]="{'form-control-danger': contactFrom.controls.email.invalid
+                       && (contactFrom.controls.email.dirty
+                       || contactFrom.controls.email.touched)}">
+            <label class="validation-message" *ngIf="contactFrom.controls.email.invalid
+                      && (contactFrom.controls.email.dirty || contactFrom.controls.email.touched)">
+              Email is required
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-5 col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label for="phone" class="label font-black">Phone</label>
+            <input type="text" nbInput class="form-control max-width-100pct" formControlName="phone" [ngClass]="{'form-control-danger': contactFrom.controls.phone.invalid
+                        && (contactFrom.controls.phone.dirty
+                        || contactFrom.controls.phone.touched)}">
+            <label class="validation-message" *ngIf="contactFrom.controls.phone.invalid
+                        && (contactFrom.controls.phone.dirty || contactFrom.controls.phone.touched)">
+              Phone is required</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-5 col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label for="message" class="label font-black">Message</label>
+            <textarea type="message" nbInput class="form-control max-width-100pct" formControlName="message" [ngClass]="{'form-control-danger': contactFrom.controls.message.invalid
+                && (contactFrom.controls.message.dirty
+                || contactFrom.controls.message.touched)}"></textarea>
+            <label class="validation-message" *ngIf="contactFrom.controls.message.invalid
+                && (contactFrom.controls.message.dirty || contactFrom.controls.message.touched)">
+              Message is required</label>
+            <button class="width-30 pull-right margin-top-2em" nbButton type="submit">Send</button>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-xs-12 col-sm-6">
+        <div class="contact-details pull-right">
+          <i class="fas fa-phone icon"></i> <label>+61 417 212 240</label>
+          <br />
+          <i class="far fa-envelope icon"></i> <label>accounts@aspiresme.com</label>
+        </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

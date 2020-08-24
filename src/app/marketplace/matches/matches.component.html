@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="pr-2">
+        <ngx-search-filter title="Matches" [commodities]="commodities" 
+        [userState]="userState" [isRegisteredUser]="isRegisteredUser"
+        [locationFilterType]="locationFilterType" [locationFilterKms]="locationFilterKms"
+        [locationFilterAddressId]="locationFilterAddressId" [_addresses]="_addresses" [resourceListingtypes]="resourceListingtypes"
+        [_commids]="_commids" [_typeids]="_typeids" (applyFilter)="applyFilter($event)"></ngx-search-filter>
+    </div>
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <div class="row justify-content-center padding-bottom-2em padding-adjustment">
+          <div class="col-10">
+            <input class="form-control" [value]="search1" #searchBox name ngxTypeahead [taItemTpl]="myTemp"
+              [taList]="resourcesSearch" (taSelected)="selectedStatic($event)" [taAllowEmpty]="true"
+              (keyup.enter)="search($event)" (keyup)="searchInputchange($event)" id="searchInput" #searchInput>
+          </div>
+          <div class="col-1">
+            <button nbButton (click)="getResourcesForMarket()"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <ng-template #myTemp let-item>
+          <div class="search-item">
+            {{item.result.name}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="resources?.length == 0" class="col no-resources text-center">
+        <div>No matching resources are available.</div>
+      </div>
+      <div *ngFor="let item of resources" class="col-12 col-sm-6 col-md-4 col-lg-3 min-width16em">
+        <ngx-item-card [id]="item.id" [name]="item.name" [type]="item.type" [price]="item.price" [offers]="item.offers"
+          [views]="item.views" [imagePath]="item.imageName"></ngx-item-card>
+      </div>
+    </div>
+  </div>
+</div>

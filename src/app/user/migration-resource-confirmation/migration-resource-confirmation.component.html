@@ -1,0 +1,255 @@
+<div *ngIf="!IsResourceConfirmationDone">
+  <div class="row justify-content-center heading">
+    <h5 class="text-center">Please confirm which of your resources are still active or no longer available</h5>
+  </div>
+  <div class="row justify-content-center grey-text">
+    <label>Active resourceswill appear in the ASPIRE marketplace.</label>
+  </div>
+  <div *ngFor="let item of resourcesOut; let i = index" class="row justify-content-center">
+    <div class="col-lg-11 col-md-11 col-xl-11 col-xs-12 col-sm-12 justify-content-center" *ngIf="currentIndex === i"
+      [@slideInOut]>
+      <div class="row">
+        <div class="col-12 margin-bottom-2em">
+          <nb-accordion multi="true">
+            <nb-accordion-item class="margin-bottom-0-5em">
+              <nb-accordion-item-header class="font-weight-400">
+                <div class="row">
+                  <div class="col-sm-4 col-md-3 border-right">
+                    <span class="min-width-10em">{{item.resourceListing?.resource?.name}}</span>
+                  </div>
+                  <div class="col-sm-4 col-md-1 border-right">
+                    <span class="item-status-color">{{item.resourceListing?.approved ? 'Closed': 'Active'}}</span>
+                  </div>
+                  <div class="col-sm-4 col-md-1 border-right">
+                    <span>{{item.resourceListing?.idString}}</span>
+                  </div>
+                  <div class="col-sm-4 col-md-3 border-right">
+                    <span> {{item.resourceListing?.quantity}} {{item.resourceListing?.unit?.name}}
+                      {{item.resourceListing?.frequency?.name}}</span>
+                  </div>
+                  <div class="col-sm-4 col-md border-right">
+                    <span>Views:</span> <span class="item-count-color"> {{item.resourceListing?.views}}</span>
+                  </div>
+                  <div class="col-sm-4 col-md">
+                    <span>Offers:</span> <span class="item-count-color"> {{item.resourceOffers?.length}}</span>
+                  </div>
+                </div>
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+                <div class="row">
+                  <div class="col">
+                    <div class="pull-right item-links font-size-1_2 item-header-icon-color">
+                      <label class=" font-size-1em icon-label" nbTooltip="View Resource"
+                        (click)="navigateToListing(resourcedetails,item.resourceListing);" nbTooltipPlacement="bottom">
+                        <nb-icon icon="list" status="primary" pack="solid">
+                        </nb-icon>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-4 col-md-4">
+                    <div class="form-group">
+                      <label for="pricing" class="label">Pricing</label>
+                      <br />
+                      <span>{{item.resourceListing?.resourceListType?.label}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-md-4">
+                    <div class="form-group">
+                      <label for="location" class="label">Location</label>
+                      <br />
+                      <span>{{item.resourceListing?.approved ? item.resourceListing?.address?.fullAddress : item.resourceListing?.address?.suburb}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-md-4">
+                    <div class="form-group">
+                      <label for="attributes" class="label">Attributes</label>
+                      <br />
+                      <span>{{item.attributeString}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-4 col-md-4">
+                    <div class="form-group">
+                      <label for="price" class="label">List Price</label>
+                      <br />
+                      <span>AU ${{item.price}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-md-4">
+                    <div class="form-group">
+                      <label for="negotiable" class="label">Negotiable</label>
+                      <br />
+                      <span>{{item.resourceListing?.priceNegotiable ? 'Yes' : 'No'}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-md-4">
+                    <div class="form-group">
+                      <label for="location" class="label">Date Listed</label>
+                      <br />
+                      <span>{{item.resourceListing?.createdDate | dateFormat}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-4 col-md-4">
+                    <div class="form-group">
+                      <label for="active" class="label">Active Duration</label>
+                      <br />
+                      <span>{{getActiveDuration(item.resourceListing?.createdDate) }} days</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-8 col-md-8">
+                    <div class="form-group">
+                      <label for="location" class="label">Description</label>
+                      <br />
+                      <span>{{item.resourceListing?.description}}</span>
+                    </div>
+                  </div>
+                </div>
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+        </div>
+        <div class="col-12 justify-content-center text-center">
+          <button (click)="setResourceAsInActive(item.resourceListing?.id,i);" class="margin-right-1em" nbButton
+            status="danger">Not Available</button>
+          <button (click)="setResourceAsActive(item.resourceListing?.id,i);" nbButton>Active</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="IsResourceConfirmationDone">
+  <div class="row justify-content-center heading">
+    <h5 class="text-center">You're all set!</h5>
+  </div>
+  <div class="row justify-content-center grey-text">
+    <label>If you have any questions, you can reach us at <a
+        href="mailto:circular@aspiresme.com">circular@aspiresme.com</a> </label>
+  </div>
+  <div class="row justify-content-center icon">
+    <i class="far fa-check-circle"></i>
+  </div>
+  <div class="row justify-content-center">
+    <button (click)="setComapanyAsMigrated();" nbButton>Next</button>
+  </div>
+</div>
+<!-- Resource Details Modal -->
+<ng-template #resourcedetails let-data let-ref="dialogRef">
+<div class="col-md-12 col-lg-12 col-xxxl-12 resource-modal">
+  <nb-card class="resource-card">
+    <nb-card-body>
+      <div class="pull-right">
+        <label class=" font-size-1_5em icon-label" nbTooltip="Back" (click)="ref.close()"
+          nbTooltipPlacement="bottom">
+          <nb-icon icon="times-circle" status="primary" pack="regular">
+          </nb-icon>
+        </label>
+      </div>
+      <div class="row margin-top-1-5em">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 col-xxxl-4 min-width-30em">
+          <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="gallery-border"></ngx-gallery>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxxl-4">
+          <div class="row">
+            <div class="col-12">
+              <h5 class="title-spacing bottom-border1">{{_resourceListing?.resource?.name}}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <strong>Listing</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label>{{_resourceListing?.resourceListType?.label}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <strong>{{_resourceListing?.resourceListType?.label == 'Seller paid disposal'? 'Payment for Disposal' : 'List Price'}}</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label>AUD ${{this._listingPrice}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <strong>Commodity</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label>{{_resourceListing?.commodity?.name}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <strong>Quantity</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label nbTooltipPlacement="bottom"
+                [nbTooltip]="_resourceListing?.unit?.measure">{{_resourceListing?.quantity}}
+                {{_resourceListing?.unit?.symbol}}
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <strong>Frequency</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label>{{_resourceListing?.frequency?.name}}
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <strong>Location</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label>{{_resourceListing?.approved ? _resourceListing?.address?.fullAddress : _resourceListing?.address?.suburb}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5 ">
+              <strong>Description</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label>{{_resourceListing?.description}}</label>
+            </div>
+          </div>
+          <div class="bidding-background">
+            <div class="row bottom10">
+              <div class="col-5 ">
+                <label class="font-small">Negotiable ({{_resourceListing?.priceNegotiable ? 'Yes' : 'No'}})</label>
+                <br />
+                <strong>AUD ${{this._listingPrice}}</strong>
+                <br />
+              </div>
+              <div class="col-7 text-right">
+                [ <label class="font-small blue">{{_resourceListingWithOfferCount?.offerCount}} Offers</label> ]
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxxl-3">
+          <div class="row">
+            <div class="col-12">
+              <h5 class="title-spacing bottom-border1">Seller</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <strong>Transactions</strong>
+            </div>
+            <div class="col-7 text-right">
+              <label>{{_resourceListingWithOfferCount?.closedTransactionCount}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+</ng-template>

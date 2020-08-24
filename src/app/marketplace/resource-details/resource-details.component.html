@@ -1,0 +1,323 @@
+<div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+        <nb-card-body>
+            <div class="pull-right">
+                <label
+                    class="font-size-1_5em icon-label"
+                    nbTooltip="Back"
+                    (click)="navigateBack()"
+                    nbTooltipPlacement="bottom"
+                >
+                    <nb-icon
+                        icon="times-circle"
+                        status="primary"
+                        pack="regular"
+                    >
+                    </nb-icon>
+                </label>
+            </div>
+            <div class="row margin-top-1-5em">
+                <div
+                    class="col-sm-12 col-md-12 col-lg-5 col-xl-4 col-xxxl-4 min-width-30em"
+                >
+                    <h6 class="title-spacing">
+                        {{ _resourceListing?.resource?.name }}
+                    </h6>
+                    <ngx-gallery
+                        [options]="galleryOptions"
+                        [images]="galleryImages"
+                        class="gallery-border"
+                    ></ngx-gallery>
+                </div>
+                <div
+                    class="col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxxl-4 min-width-20em"
+                >
+                    <div class="row">
+                        <div class="col-12">
+                            <h6 class="title-spacing font-transparent">
+                                Resource Details
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>Listing ID</strong>
+                        </div>
+                        <div class="col-6 text-right">
+                            <label>{{
+                                _resourceListing?.idString == null
+                                    ? _resourceListing?.id
+                                    : _resourceListing?.idString
+                            }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>{{
+                                _resourceListing?.resourceListType?.label ==
+                                "Seller paid disposal"
+                                    ? "Payment for Disposal"
+                                    : "Price"
+                            }}</strong>
+                        </div>
+                        <div class="col-6 text-right">
+                            <label>AUD ${{ this._listingPrice }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Listing Type</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListing?.resourceListType?.label
+                            }}</label>
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="
+                            _resourceListing?.resourceListType?.label != 'Sale'
+                        "
+                        class="row"
+                    >
+                        <div class="col-5">
+                            <strong>Approx. Resource Value</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListing?.resourceListType?.label ==
+                                "Seller paid disposal"
+                                    ? _resourceListing?.disposalPrice
+                                    : _resourceListing?.freeApproxPrice
+                            }}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Commodity</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListing?.commodity?.name
+                            }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Quantity</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label
+                                nbTooltipPlacement="bottom"
+                                [nbTooltip]="_resourceListing?.unit?.measure"
+                                >{{ _resourceListing?.quantity }}
+                                {{ _resourceListing?.unit?.symbol }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Frequency</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label
+                                >{{ _resourceListing?.frequency?.name }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div
+                        *ngIf="
+                            _resourceListing?.resourceListType?.label == 'Sale'
+                        "
+                        class="row"
+                    >
+                        <div class="col-5">
+                            <strong>Negotiable</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListing?.priceNegotiable ? "Yes" : "No"
+                            }}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Date Listed</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListing?.startDate | date: "dd.MMM.yy"
+                            }}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Description</strong>
+                        </div>
+                    </div>
+
+                    <div class="row padding-top-botton-0_5em">
+                        <div class="text-right col-12 bidding-background">
+                            <label>{{ _resourceListing?.description }}</label>
+                        </div>
+                    </div>
+
+                    <div
+                        class="row padding-top-botton-0_5em"
+                        *ngIf="_isSellerView"
+                    >
+                        <div class="col-12">
+                            <div class="title-spacing pull-right">
+                                <span
+                                    class="editListing"
+                                    (click)="
+                                        navigateToUpdateResource(
+                                            _resourceListing?.id
+                                        )
+                                    "
+                                    >Edit Listing</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    *ngIf="!_isSellerView"
+                    class="col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxxl-4 min-width-20em"
+                >
+                    <div class="row">
+                        <div class="col-12">
+                            <h6 class="title-spacing">Seller Details</h6>
+                        </div>
+                    </div>
+                    <div
+                        class="row"
+                        *ngIf="
+                            _resourceListing?.approved &&
+                            _resourceListingWithOfferCount?.companyDetails !=
+                                null
+                        "
+                    >
+                        <div class="col-5">
+                            <strong>Company Name</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListingWithOfferCount?.companyDetails
+                                    ?.name
+                            }}</label>
+                        </div>
+                    </div>
+                    <div
+                        class="row"
+                        *ngIf="
+                            _resourceListing?.approved &&
+                            _resourceListingWithOfferCount?.companyDetails !=
+                                null
+                        "
+                    >
+                        <div class="col-5">
+                            <strong>Company Phone</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListingWithOfferCount?.companyDetails
+                                    ?.phone
+                            }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>Location</strong>
+                        </div>
+                        <div class="col-7 text-right">
+                            <label>{{
+                                _resourceListing?.address?.fullAddress != ""
+                                    ? _resourceListing?.address?.fullAddress
+                                    : _resourceListing?.address?.suburb
+                            }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-9">
+                            <strong>Total Transactions</strong>
+                        </div>
+                        <div class="col-3 text-right">
+                            <label>{{
+                                _resourceListingWithOfferCount?.closedTransactionCount
+                            }}</label>
+                        </div>
+                    </div>
+
+                    <div class="row padding-top-2em">
+                        <div class="col-9" [hidden]="!_isSale">
+                            <strong >Make an Offer</strong>
+                            
+                        </div>
+                        <div [ngClass]="{'text-right' : _isSale}" class="col-3">
+                            [
+                            <label class="font-small blue"
+                                >{{
+                                    _resourceListingWithOfferCount?.offerCount
+                                }}
+                                Offers</label
+                            >
+                            ]
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="
+                            !_resourceListing.approved &&
+                            _resourceListing.isResourceMigrated
+                        "
+                        class="margin-top-08em"
+                    >
+                        <div class="row">
+                            <div class="col-9" [hidden]="!_isSale">
+                                <input
+                                    type="text"                                    
+                                    ngxTwodecimalnumber
+                                    [(ngModel)]="_offerPrice"
+                                    placeholder="0.00"
+                                    nbInput
+                                    class="form-control input-background"
+                                />
+                            </div>
+                            <div class="col-3 text-right">
+                                <button
+                                    *ngIf="!_isSale"
+                                    nbButton
+                                    (click)="checkLogin(dialogLogin, 'accept')"
+                                >
+                                    Place Interest
+                                </button>
+                                <button
+                                    *ngIf="_isSale"
+                                    nbButton
+                                    (click)="checkLogin(dialogLogin, 'offer')"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="font-size-0_8"
+                                    >Seller will be notified of your interest in
+                                    this resource</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </nb-card-body>        
+    </nb-card>    
+</div>
+<div *ngIf="_resourceListing?.id && !_isSellerView">
+    <chat-widget [isDocked]=true [popupChart]="false" [chatTitle] = 'chatTitle' [listingId] = "_resourceListing?.id" [fromId] = "this._user.id" [toId] = "_resourceListing?.userId"></chat-widget>
+</div>

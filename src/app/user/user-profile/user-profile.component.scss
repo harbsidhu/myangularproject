@@ -1,0 +1,20 @@
+.nav-label {
+    font-weight: 600;
+    color: #67df7c;
+    cursor: pointer;
+}
+
+tree-root i {
+    font-size: 1.3em;
+    color: #10874b;
+    padding-right: .5em;
+}
+
+.tree-node{
+    padding-top:1em;
+    border:solid 1px red !important;
+}
+
+[class^="flaticon-"]:before {
+    margin-left: 0px !important;
+}

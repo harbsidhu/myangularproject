@@ -1,0 +1,27 @@
+<nb-card>
+  <nb-card-header>
+    <label *ngIf="!isMigrated" class="pending-confirmation">Confirming Availability</label>
+    <img crossorigin="anonymous" class="item-image" [src]="imageToShow" alt="Place image title" (click)="goToResource()">
+    <br />
+    <label class="margin-top-1em item-card-name"> <span>{{name}}</span></label>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col">
+        <div class="pull-left">
+          <strong>AU ${{price}}</strong>
+          <br />
+          <span class="card-content">{{type}}</span>
+        </div>
+        <div class="pull-right card-content">
+          <span>{{offers}} Offers</span>
+          <br />
+          <span>{{views}} Views</span>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="primary" (click)="goToResource()">View</button>
+  </nb-card-footer>
+</nb-card>

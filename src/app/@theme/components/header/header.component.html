@@ -1,0 +1,94 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a *ngIf="hideSidebar" (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
+    </a>
+    <a class="logo" (click)="navigateToHome()">
+      <img class="aspire-logo" src="/assets/images/aspire-logo.png">ASPIRE<span></span></a>
+  </div>
+</div>
+<div class="header-container">
+  <nb-actions size="small">
+    <nb-action class="user-action" *nbIsGranted="['view', 'user']">
+      <nb-user
+      [nbContextMenu]="userMenu"
+      [onlyPicture]="userPictureOnly"
+      [name]="user?.firstname + ' ' + user?.lastname"
+      [picture]="user?.picture"
+      nbContextMenuTag="user-context-menu">
+      </nb-user>
+    </nb-action>
+  </nb-actions>
+</div>
+<ng-template #dialog let-data let-ref="dialogRef">
+  <form [formGroup]="anonymousForm" (ngSubmit)="toMarketplace()">
+    <nb-card>
+      <nb-card-header>Basic Information</nb-card-header>
+      <nb-card-body>
+        <div class="row justify-content-center min-width-50em">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="firstName" class="label">First Name</label>
+              <input type="text" placeholder="enter first name" nbInput class="form-control" formControlName="firstName"
+                [ngClass]="{'form-control-danger': anonymousForm.controls.firstName.invalid && (anonymousForm.controls.firstName.dirty || anonymousForm.controls.firstName.touched)}">
+            </div>
+            <div class="form-group">
+              <label for="lastName" class="label">Last Name</label>
+              <input type="text" placeholder="enter last name" nbInput class="form-control" formControlName="lastName"
+                [ngClass]="{'form-control-danger': anonymousForm.controls.lastName.invalid && (anonymousForm.controls.lastName.dirty || anonymousForm.controls.lastName.touched)}">
+            </div>
+            <div class="form-group">
+                <nb-checkbox> <span>Terms & Conditions | <a href="#" target="_blank">Privacy</a></span></nb-checkbox>
+              </div>
+          </div>
+          <div class="col-6">
+              <div class="form-group">
+                  <label for="email" class="label">Email</label>
+                  <input type="text" placeholder="enter email" nbInput class="form-control" formControlName="email"
+                    [ngClass]="{'form-control-danger': anonymousForm.controls.email.invalid && (anonymousForm.controls.email.dirty || anonymousForm.controls.email.touched)}">
+                </div>
+            <div class="form-group">
+              <label for="phone" class="label">Phone</label>
+              <input type="text" placeholder="enter phone number" nbInput class="form-control" formControlName="phone"
+                [ngClass]="{'form-control-danger': anonymousForm.controls.phone.invalid && (anonymousForm.controls.phone.dirty || anonymousForm.controls.phone.touched)}">
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+          <button nbButton class="padding-right-1em">Submit</button>
+        <button nbButton (click)="ref.close()">Close</button>
+      </nb-card-footer>
+    </nb-card>
+  </form>
+</ng-template>
+<ng-template #loginDialog let-data let-ref="loginDialogRef">
+    <form [formGroup]="anonymousForm" (ngSubmit)="toMarketplace()">
+      <nb-card>
+        <nb-card-header>Basic Information</nb-card-header>
+        <nb-card-body>
+          <div class="row justify-content-center min-width-50em">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="firstName" class="label">First Name</label>
+                <input type="text" placeholder="enter first name" nbInput class="form-control" formControlName="firstName"
+                  [ngClass]="{'form-control-danger': anonymousForm.controls.firstName.invalid && (anonymousForm.controls.firstName.dirty || anonymousForm.controls.firstName.touched)}">
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="label">Last Name</label>
+                <input type="text" placeholder="enter last name" nbInput class="form-control" formControlName="lastName"
+                  [ngClass]="{'form-control-danger': anonymousForm.controls.lastName.invalid && (anonymousForm.controls.lastName.dirty || anonymousForm.controls.lastName.touched)}">
+              </div>
+              <div class="form-group">
+                  <nb-checkbox> <span>Terms & Conditions | <a href="#" target="_blank">Privacy</a></span></nb-checkbox>
+                </div>
+              </div>
+          </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton class="padding-right-1em">Submit</button>
+          <button nbButton (click)="ref.close()">Close</button>
+        </nb-card-footer>
+      </nb-card>
+    </form>
+  </ng-template>

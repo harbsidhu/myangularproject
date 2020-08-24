@@ -1,0 +1,599 @@
+<div class="row justify-content-center min-height_35em">
+  <div class="col-12 align-self-center">
+    <nb-card *ngIf="!isNext" #interest>
+      <nb-card-body class="min-height-35em">
+        <div class="row margin-top-2em">
+          <h5 class="text-center width-100">What commodities are you interested in bringing into your supply chain?</h5>
+        </div>
+        <div class="row justify-content-center min-height-22em">
+          <div class="col-md-8 col-sm-12 col-xs-12 col-xl-11 margin-top-3em">
+            <div class="row justify-content-center">
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkOrganics" type="checkbox" (click)="OrganicsClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-apple"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-apple"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Organics</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkPaper" type="checkbox" (click)="PaperClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-box"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-box"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Paper & Cardboard</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkMetals" type="checkbox" (click)="MetalsClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-beam"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-beam"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Metals</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkPlastics" type="checkbox" (click)="PlasticsClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-water"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-water"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Plastics</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkGlass" type="checkbox" (click)="GlassClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-food-and-restaurant"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-food-and-restaurant"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Glass</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkTextiles" type="checkbox" (click)="TextilesClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-textile"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-textile"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Textile</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkHazardous" type="checkbox" (click)="HazardousClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-biohazard"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-biohazard"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Hazardous</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkChemicals" type="checkbox" (click)="ChemicalsClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-flasks"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-flasks"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Chemicals</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkLiquids" type="checkbox" (click)="LiquidsClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-purity"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-purity"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Liquids</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkEwaste" type="checkbox" (click)="EwasteClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-plug"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-plug"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>e-Waste</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkCnd" type="checkbox" (click)="CndClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-demolition"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-demolition"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>C & D</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkFurniture" type="checkbox" (click)="FurnitureClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-couch"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-couch"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Furniture</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkAutomotive" type="checkbox" (click)="AutomotiveClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-water-pump"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-water-pump"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Automotive</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkWood" type="checkbox" (click)="WoodClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-log"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-log"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Wood / Timber</b>
+                </div>
+              </div>
+              <div id="wrapper" class="row justify-content-center">
+                <div class="col-12">
+                  <div class="pretty p-icon p-toggle">
+                    <input [(ngModel)]="_chkOther" type="checkbox" (click)="OtherClicked($event)" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-recycle-symbol"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-recycle-symbol"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <b>Other</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-sm-12 col-xs-12 col-xl-9">
+            <button class="pull-right" nbButton (click)="next();" [disabled]="_noneChecked">Next</button>
+          </div>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+    <nb-card *ngIf="isNext">
+      <nb-card-body class="min-height-35em">
+        <div class="row">
+          <h5 class="text-center width-100">select the resources you’re interested in bringing into your supply chain</h5>
+        </div>
+        <div *ngIf="_chkOrganics" class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-apple"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-apple"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstOrganics" [(ngModel)]="_selectedOrganics" [settings]="dropdownSettings"></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="_chkPaper" class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-box"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-box"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect class="form-control" [data]="_lstPaper" [(ngModel)]="_selectedPaper"
+                  [settings]="dropdownSettings" ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkMetals" class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-beam"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-beam"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstMetals" [(ngModel)]="_selectedMetals" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkPlastics"  class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-water"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-water"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstPlastics" [(ngModel)]="_selectedPlastics" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkGlass"  class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-food-and-restaurant"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-food-and-restaurant"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstGlass" [(ngModel)]="_selectedGlass" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkTextiles" class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-textile"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-textile"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstTextiles" [(ngModel)]="_selectedTextiles" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkHazardous"  class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-biohazard"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-biohazard"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstHazardous" [(ngModel)]="_selectedHazardous" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkChemicals"  class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-flasks"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-flasks"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstChemicals" [(ngModel)]="_selectedChemicals" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div  *ngIf = "_chkLiquids"  class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-purity"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-purity"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstLiquids" [(ngModel)]="_selectedLiquids" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkEwaste"  class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-plug"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-plug"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstEwaste" [(ngModel)]="_selectedEwaste" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkCnd"  class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-demolition"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-demolition"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstCnd" [(ngModel)]="_selectedCnd" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkFurniture" class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-couch"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-couch"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstFurniture" [(ngModel)]="_selectedFurniture" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkAutomotive" class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <div class="row">
+              <div class="col-3">
+                <div class="pretty p-icon p-toggle">
+                  <input type="checkbox" />
+                  <div class="state p-on font-color">
+                    <i class="flaticon-water-pump"></i>
+                  </div>
+                  <div class="state p-off">
+                    <i class="flaticon-water-pump"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                <angular2-multiselect [data]="_lstAutomotive" [(ngModel)]="_selectedAutomotive" [settings]="dropdownSettings"
+                  ></angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf = "_chkWood" class="row justify-content-center">
+            <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+              <div class="row">
+                <div class="col-3">
+                  <div class="pretty p-icon p-toggle">
+                    <input type="checkbox" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-log"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-log"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                  <angular2-multiselect [data]="_lstWood" [(ngModel)]="_selectedWood" [settings]="dropdownSettings"
+                    ></angular2-multiselect>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div *ngIf = "_chkOther"  class="row justify-content-center">
+            <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+              <div class="row">
+                <div class="col-3">
+                  <div class="pretty p-icon p-toggle">
+                    <input type="checkbox" />
+                    <div class="state p-on font-color">
+                      <i class="flaticon-recycle-symbol"></i>
+                    </div>
+                    <div class="state p-off">
+                      <i class="flaticon-recycle-symbol"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-9 padding-top-2-5em padding-left-2-5em">
+                  <angular2-multiselect [data]="_lstOther" [(ngModel)]="_selectedOther" [settings]="dropdownSettings"
+                    ></angular2-multiselect>
+                </div>
+              </div>
+            </div>
+          </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div>
+            <div *ngIf="_commoditiesWithNoResourcesChecked" class="row justify-content-center">
+                <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+                    <label class="validation-message">Please select at least one resource for each commodity</label>
+                </div>
+              </div>
+          </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-sm-12 col-xs-12 col-xl-6">
+            <button class="margin-left-0-7em pull-left" nbButton (click)="back();">Back</button>
+            <button class="pull-right" nbButton (click)="navigateToDashboard();">Next</button>
+          </div>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+  </div>

@@ -1,0 +1,70 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 14/01/2020 11:35
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("/assets/fonts/Flaticons/Flaticon.eot");
+  src: url("/assets/fonts/flaticons/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("/assets/fonts/flaticons/Flaticon.woff2") format("woff2"),
+       url("/assets/fonts/flaticons/Flaticon.woff") format("woff"),
+       url("/assets/fonts/flaticons/Flaticon.ttf") format("truetype"),
+       url("/assets/fonts/flaticons/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("/assets/fonts/flaticons/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-flasks:before { content: "\f100"; }
+    .flaticon-box:before { content: "\f101"; }
+    .flaticon-biohazard:before { content: "\f102"; }
+    .flaticon-demolition:before { content: "\f103"; }
+    .flaticon-beam:before { content: "\f104"; }
+    .flaticon-plug:before { content: "\f105"; }
+    .flaticon-water:before { content: "\f106"; }
+    .flaticon-couch:before { content: "\f107"; }
+    .flaticon-apple:before { content: "\f108"; }
+    .flaticon-purity:before { content: "\f109"; }
+    .flaticon-recycle-symbol:before { content: "\f10a"; }
+    .flaticon-water-pump:before { content: "\f10b"; }
+    .flaticon-textile:before { content: "\f10c"; }
+    .flaticon-food-and-restaurant:before { content: "\f10d"; }
+    .flaticon-log:before { content: "\f10e"; }
+
+        $font-Flaticon-flasks: "\f100";
+        $font-Flaticon-box: "\f101";
+        $font-Flaticon-biohazard: "\f102";
+        $font-Flaticon-demolition: "\f103";
+        $font-Flaticon-beam: "\f104";
+        $font-Flaticon-plug: "\f105";
+        $font-Flaticon-water: "\f106";
+        $font-Flaticon-couch: "\f107";
+        $font-Flaticon-apple: "\f108";
+        $font-Flaticon-purity: "\f109";
+        $font-Flaticon-recycle-symbol: "\f10a";
+        $font-Flaticon-water-pump: "\f10b";
+        $font-Flaticon-textile: "\f10c";
+        $font-Flaticon-food-and-restaurant: "\f10d";
+        $font-Flaticon-log: "\f10e";

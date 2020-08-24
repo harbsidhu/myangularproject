@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+      <nb-card-header>
+      </nb-card-header>
+      <nb-card-body>
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="Login()">
+          <div class="row justify-content-center">
+            <div class="col-xl-4 col-lg-5 col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label for="email" class="label">Email</label>
+                <input type="text" nbInput class="form-control max-width-100pct" formControlName="email" [ngClass]="{'form-control-danger': loginForm.controls.email.invalid 
+                     && (loginForm.controls.email.dirty 
+                     || loginForm.controls.email.touched)}">
+                <label class="validation-message" *ngIf="loginForm.controls.email.invalid 
+                    && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+                  Email is required
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="password" class="label">Password</label>
+                <input type="password" nbInput class="form-control max-width-100pct" formControlName="password" [ngClass]="{'form-control-danger': loginForm.controls.password.invalid 
+                      && (loginForm.controls.password.dirty 
+                      || loginForm.controls.password.touched)}">
+                <label class="validation-message" *ngIf="loginForm.controls.password.invalid 
+                      && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+                  Password is required</label>
+              </div>
+              <div *ngIf="isError">
+                <label class="validation-message"> Email and/or password is incorrect.</label>
+              </div>
+              <div class="form-group">
+                <nb-checkbox (checkedChange)="toggle($event)"> <span class="nav-label" (click)="openTnC();">Terms & Conditions </span> | 
+                  <span class="nav-label" (click)="openPrivacy();"> Privacy</span> </nb-checkbox>
+                <!-- <a href="#" target="_blank">Privacy</a> -->
+                <div *ngIf="isTermError" class="row">
+                    <div class="col">
+                      <label class="validation-message"> Please agree to Terms & Conditions.</label>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col">
+                  <button class="width-100pct" [nbSpinner]="loading" nbSpinnerStatus="success" nbButton type="submit">Login</button>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="justify-content-center">
+                  <label class="nav-label" (click)="navigateToCreateAccount()">create account</label>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>

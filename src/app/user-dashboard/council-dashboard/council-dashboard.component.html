@@ -1,0 +1,146 @@
+<div class="row">
+  <nb-card *ngIf="!isResourceClicked">
+    <nb-card-body>
+      <ag-grid-angular style="width: 100%; height:100%" class="ag-theme-balham" [rowData]="companyData"
+        [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [gridOptions]="gridOptions"
+        rowHeight="40" [pagination]="true" (rowDoubleClicked)="onRowDoubleClicked($event)" [paginationPageSize]="20"
+        animateRows=true>
+      </ag-grid-angular>
+    </nb-card-body>
+  </nb-card>
+  <nb-card *ngIf="isResourceClicked">
+    <nb-card-header>
+      Company
+      <div class="pull-right">
+        <label class=" font-size-1_5em icon-label" nbTooltip="Close" (click)="closeDialog()" nbTooltipPlacement="bottom">
+          <nb-icon icon="times-circle" status="primary" pack="regular">
+          </nb-icon>
+        </label>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group">
+            <label for="firstName" class="label">First Name</label>
+            <br />
+            <label for="companyName">{{_userCompany?.firstname}}</label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group">
+            <label for="lastName" class="label">Last Name</label>
+            <br />
+            <label for="companyName">{{_userCompany?.lastname}}</label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group">
+            <label for="email" class="label">Email</label>
+            <br />
+            <label for="email">{{_userCompany?.email}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="companyName" class="label">Company Name</label>
+            <br />
+            <label for="companyName">{{_userCompany?.company?.name}}</label>
+          </div>
+          <div class="form-group">
+            <label for="ABN" class="label">ABN</label>
+            <br />
+            <label>{{_userCompany?.company?.abn}}</label>
+          </div>
+          <div class="form-group">
+            <label for="noOfEmployees" class="label">No. of employees</label>
+            <br />
+            <label>{{_userCompany?.company?.noOfEmployees?.name}}</label>
+          </div>
+          <div class="form-group">
+            <label for="jobRole" class="label">Job role</label>
+            <br />
+            <label>{{_userCompany?.jobRole}}</label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="council" class="label">Council</label>
+            <br />
+            <label>{{_userCompany?.company?.council?.name}}</label>
+          </div>
+          <div class="form-group">
+            <label for="industry" class="label">Industry (ANZSIC) </label>
+            <br />
+            <label>{{_userCompany?.company?.division?.name}}</label>
+          </div>
+          <div class="form-group">
+            <label for="subDivision " class="label">Subdivision </label>
+            <br />
+            <label>{{_userCompany?.company?.subDivision?.name}}</label>
+          </div>
+          <div class="form-group">
+            <label for="subDivision " class="label">Are you a registered recycling company? </label>
+            <br />
+            <label>{{_userCompany?.company?.recycler ? 'Yes': 'No'}}</label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="phone" class="label">Phone No.</label>
+            <br />
+            <label>{{_userCompany?.company?.phone}}</label>
+          </div>
+          <div class="form-group">
+            <label for="primaryAddress" class="label">Primary address</label>
+            <br />
+            <label>{{companyPrimaryAddress}}</label>
+          </div>
+          <div class="form-group">
+            <label for="additionalAddress" class="label">Additional locations.</label>
+            <div *ngFor="let address of companyAdditionalAddress">
+              <label>{{address?.fullAddress}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group">
+            <label for="firstName" class="label">Date Registered</label>
+            <br />
+            <label for="companyName">{{_userCompany?.company?.dateCreated}}</label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group">
+            <label for="lastName" class="label">Last Login</label>
+            <br />
+            <label for="companyName">{{_userCompany?.lastLogin}}</label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group">
+            <label for="email" class="label">Last Access</label>
+            <br />
+            <label for="email">{{_userCompany?.lastLogin}}</label>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  <nb-card *ngIf="isResourceClicked">
+  <nb-card-header>
+    Matches
+  </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <ag-grid-angular style="width: 100%; height:100%" class="ag-theme-balham" [rowData]="matchesData"
+              [columnDefs]="columnDefsMatches" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)"  rowHeight="40"
+              [gridOptions]="gridOptionsMatches" [pagination]="true" [paginationPageSize]="10" animateRows=true></ag-grid-angular>
+          </div>
+</nb-card-body>
+</nb-card>
+</div>

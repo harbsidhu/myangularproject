@@ -1,0 +1,20 @@
+video {
+    width:100%;
+    position: fixed;
+    z-index:-1;
+  }
+
+  nb-layout.window-mode {
+      background:transparent !important;
+  }
+
+  nb-layout .layout{
+    background:transparent !important;
+}
+
+
+.nb-layout-column-background {
+  background-image: url('../../../../assets/images/landing_page.jfif');
+  background-size: cover;
+  padding:0 !important;
+}

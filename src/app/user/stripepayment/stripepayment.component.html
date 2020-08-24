@@ -1,0 +1,27 @@
+<form id="payment-form">
+<nb-card class="min-width-40em" [nbSpinner]="loading" nbSpinnerSize="large" nbSpinnerStatus="success"
+nbSpinnerMessage="Payment in progress...">
+  <nb-card-header> Payment Information</nb-card-header>
+  <nb-card-body>
+    <div class="Row">
+      <div class="col-12">
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="firstName" class="label">Credit or debit card details</label>
+          <div class="payment-div">
+          <div id="cardElement"></div>
+        </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div id="card-errors form-control-danger" role="alert"></div>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton class="padding-right-1em" (click)="submitPayment()">Pay ${{paymentAmount}} AUD</button>
+    <button nbButton class="pull-right" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>
+</form>

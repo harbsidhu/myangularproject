@@ -1,0 +1,121 @@
+.select-adjust{
+    max-width: 100em !important;
+    width:100%;
+}
+
+.description-adjust{
+    max-width: 49em !important;
+    width:100%;
+}
+
+.form-control{
+    max-width: 100em !important;
+}
+
+.width-adjust{ max-width:50em !important;}
+
+.edit-link {
+    font-size: 0.8em;
+    color: #00a1ff;
+    cursor: pointer;
+}
+
+
+//// Image Upload
+
+.image-table {
+    width:100%
+}
+.my-drop-zone {
+    border: dotted 3px lightgray;
+    width: 26em;
+    height: 18em;
+    box-shadow: 0px 0px 8px #d7d7d7;
+}
+/* Default class applied to drop zones on over */
+.invalid-drag { border: dotted 3px red; }
+.valid-drag { border: dotted 3px green; }
+html, body { height: 100%; }
+.previewIcon{
+  width:70px;height:70px;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+.fileupload-div-outer {
+    text-align: center;
+    padding: 8% 0;
+}
+
+.fileupload-div {
+    align-content: center;
+    align-self: center;
+}
+
+.fileupload-icon {
+    font-size: 2.5em;
+    color: #60cc72;
+    padding-bottom: 0.3em;
+}
+
+.image-delete {
+    color: #dc3545;
+    font-size: 2.1rem;
+    cursor: pointer;
+    padding: 5px;
+    border:1px solid rgba(255, 255, 255, 0);
+}
+
+.image-delete:hover {
+    color: #ff7979;
+    border: 1px solid #ff9292;
+    border-radius: 8px;
+
+}
+
+.image-error {
+    border:1px solid red;
+    border-radius: 3px;
+}
+tr {
+    border-bottom: 1px solid #dbdbdb;
+}
+
+td {
+    padding: 5px;
+}
+
+.attribute-tab {
+    margin-left: 0.3em;
+    padding: .2em;
+    font-size: .9em;
+    border: 1px solid #60cc72;
+    border-radius: 2px;
+}
+
+.fileupload-top-line {
+    font-weight: 1000;
+    font-size: 1.3em;
+    color: #707070;
+    padding-bottom: .5em;
+}
+
+.fileupload-middle-line {
+    font-weight: 700;
+    color: #aaa9a9;
+    padding-bottom: 0.8em;
+}
+
+.fileupload-bottom-line {
+    font-weight: 300;
+    font-size: 13px;
+    color: #acacac;
+}
+
+.nav-label {
+    padding-top: 1em;
+    cursor: pointer;
+    color:#58A173;
+}
+
+

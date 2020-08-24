@@ -1,0 +1,126 @@
+<div class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card>
+    <nb-card-header>
+      Personal<span class="profile-edit-span pull-right" (click)="navigateToProfileUpdate()">Edit</span>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="firstName" class="label">First Name</label>
+                <br />
+                <label for="companyName">{{_user.firstname}}</label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="lastName" class="label">Last Name</label>
+                <br />
+                <label for="companyName">{{_user.lastname}}</label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="email" class="label">Email</label>
+                <br />
+                <label for="email">{{_user.email}}</label>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="_user.company.isMigrationComplete" class="row">
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <label class="nav-label" for="companyName" (click)="navigateToChangePassword()">Change Password</label>
+                </div>
+              </div>
+          </div>
+    </nb-card-body>
+  </nb-card>
+  <nb-card>
+    <nb-card-header>
+      Company <span class="profile-edit-span pull-right" (click)="navigateToProfileUpdate()">Edit</span>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group">
+                <label for="companyName" class="label">Company Name</label>
+                <br />
+                <label for="companyName">{{_user.company?.name}}</label>
+              </div>
+              <div class="form-group">
+                <label for="abn" class="label">ABN</label>
+                <br />
+                <label>{{_user.company?.abn}}</label>
+              </div>
+              <div class="form-group">
+                <label for="noOfEmployees" class="label">No. of employees</label>
+                <br />
+                <label>{{_user.company?.noOfEmployees?.name}}</label>
+              </div>
+              <div class="form-group">
+                <label for="jobRole" class="label">Job role</label>
+                <br />
+                <label>{{_user.jobRole}}</label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group">
+                <label for="council" class="label">Council</label>
+                <br />
+                <label>{{_user.company?.council?.name}}</label>
+              </div>
+              <div class="form-group">
+                <label class="label">Industry (ANZSIC) </label>
+                <br />
+                <label>{{_user.company?.division?.name}}</label>
+              </div>
+              <div class="form-group">
+                <label class="label">Subdivision </label>
+                <br />
+                <label>{{_user.company?.subDivision?.name}}</label>
+              </div>
+              <div class="form-group">
+                <label class="label">Are you a registered recycling company? </label>
+                <br />
+                <label>{{_user.company.recycler==true? 'Yes': 'No'}}</label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group">
+                <label for="phone" class="label">Phone No.</label>
+                <br />
+                <label>{{_user.company.phone}}</label>
+              </div>
+              <div class="form-group">
+                <label for="primaryAddress" class="label">Primary address</label>
+                <br />
+                <label>{{_primaryAddress}}</label>
+              </div>
+              <div class="form-group">
+                <label for="additionalAddress" class="label">Additional locations.</label>
+                <div *ngFor="let address of _adAddresses">
+                  <label>{{address}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+    </nb-card-body>
+  </nb-card>
+  <nb-card>
+    <nb-card-header>
+      Interest <span class="profile-edit-span pull-right" (click)="navigateToUserInterest()">Edit</span>
+    </nb-card-header>
+    <nb-card-body>
+      <tree-root #tree [nodes]="_resources" [options]="treeOptions">
+        <ng-template #treeNodeTemplate let-node let-index="index">
+          <i [class]="node.data.icon"></i>
+          <span>{{ node.data.name }}</span>
+        </ng-template>
+      </tree-root>
+    </nb-card-body>
+  </nb-card>
+</div>
+<div class="col-12">
+  <button *ngIf = "!this.isMigrationComplete" (click)="navigateToConfirmResources();" nbButton>My Profile Is Correct</button>
+</div>

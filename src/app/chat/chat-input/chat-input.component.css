@@ -1,0 +1,53 @@
+.chat-input-text {
+ height: 24px;
+  border: 0;
+  resize: none;
+  border: none;
+  overflow: auto;
+  outline: none;
+  box-shadow: none;
+  font-size: 14px;  
+  color: inherit;
+  width: 100%;
+  margin: 2px;
+  background-color: #F9F9F9;
+}
+
+.chat-input-text::-webkit-input-placeholder {
+  color: inherit;
+}
+.chat-input-text::-moz-placeholder {
+  color: inherit;
+}
+.chat-input-text::-ms-input-placeholder {
+  color: inherit; 
+}
+
+.chat-input-submit {
+  padding: 0px;
+  background-color: #58A173;
+  color: white;
+  height: 30px;
+ 
+}
+
+.input-div{
+  float: left;
+  width: 85%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.button-div{
+  width: 15%;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+
+ .icon {
+  height: 20px;
+  width: 35px !important;
+  padding: 3px;
+}

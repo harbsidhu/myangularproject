@@ -1,0 +1,74 @@
+.fixed-sidebar {
+    position: fixed;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.position-fixed { position:fixed }
+
+.div-sidebar{
+    border-bottom: 1px solid #eaeaea;
+    padding:0em;
+    min-width: 15em;
+}
+
+label.label{
+    padding: 0 !important;
+}
+
+nb-checkbox > label{
+    padding: 0 !important;
+}
+
+nb-radio-group > nb-radio > * {
+    padding: 0 !important;
+}
+
+nb-radio-group > label {
+    padding: 0 !important;
+}
+
+.min-width16em{
+    min-width: 15em;
+}
+
+.filter-inner-div{
+    position: fixed;
+    z-index: 100;
+    background-color: #ffffff;
+    min-width: 15em;
+    padding: 0em 1em 15em 1em;
+    height: 100%;
+}
+
+.filter-heading{
+    margin-bottom: 1em;
+    color: #808080;
+    font-size: 0.9em;
+}
+
+.filter-heading-top{
+    margin-top: 1em;
+}
+
+.filter-text-div{
+    border-right: solid 1px #EAEFF5;
+    padding: 0.8em 1.5em 1em .5em;
+    cursor: pointer;
+}
+
+.filter-text-div span{
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari 3-8 */
+    transform: rotate(90deg);
+}
+
+.filter-header{
+    background-color: white;
+    z-index: 1;
+    border-bottom: 1px #ececec solid;
+    padding-top:0.6em;
+}

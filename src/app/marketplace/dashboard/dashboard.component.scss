@@ -1,0 +1,152 @@
+.view-icon
+{
+    color: #858282;
+    font-size: 2em;
+}
+
+nb-card-header > img{
+    width:100%
+}
+
+.card{
+    background-color: #ffffff;
+    border: 0 solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(44, 51, 73, 0.1);
+    color: #1a2138;
+    font-family: Open Sans, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    margin-bottom: 1.875rem;
+    scrollbar-face-color: #e4e9f2;
+    scrollbar-track-color: #f7f9fc;
+    min-width: 15em;
+}
+
+.card-header{
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #edf1f7;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    color: #1a2138;
+    font-family: Open Sans, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+
+    & > img{
+        width:100%;
+    }
+}
+
+.fixed-sidebar {
+    position: fixed;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.position-fixed { position:fixed }
+
+.div-sidebar{
+    border-bottom: 1px solid #eaeaea;
+    padding:0em;
+    min-width: 15em;
+}
+
+label.label{
+    padding: 0 !important;
+}
+
+nb-checkbox > label{
+    padding: 0 !important;
+}
+
+nb-radio-group > nb-radio > * {
+    padding: 0 !important;
+}
+
+nb-radio-group > label {
+    padding: 0 !important;
+}
+
+.min-width16em{
+    min-width: 15em;
+}
+
+.filter-inner-div{
+    position: fixed;
+    z-index: 100;
+    background-color: #ffffff;
+    min-width: 15em;
+    padding: 0em 1em 15em 1em;
+    height: 100%;
+}
+
+.filter-heading{
+    margin-bottom: 1em;
+    color: #808080;
+    font-size: 0.9em;
+}
+
+.filter-heading-top{
+    margin-top: 1em;
+}
+
+.filter-text-div{
+    border-right: solid 1px #EAEFF5;
+    padding: 0.8em 1.5em 1em .5em;
+    cursor: pointer;
+}
+
+.filter-text-div span{
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari 3-8 */
+    transform: rotate(90deg);
+}
+
+.filter-header{
+    background-color: white;
+    z-index: 1;
+    border-bottom: 1px #ececec solid;
+    padding-top:0.6em;
+}
+
+//Search
+
+.search-item{
+    color: #696969;
+  }
+
+  .padding-adjustment {
+      padding-right: 0px ;
+      padding-right: 0px;
+  }
+
+
+  .datalist options{
+    color: red;
+    background-color: white;
+  }
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #60cc72;
+    border-color: #60cc72;
+}
+
+.no-resources {
+    color: #969696;
+    font-size: 1.3em;
+  }
+
+  .filterInput {
+    width: 175px;
+}
+
+
+.width-adjust{ max-width:15em !important;}

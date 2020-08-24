@@ -1,0 +1,68 @@
+<div class="wrapper primary">
+  <div class="chat-box" *ngIf="visible" [@fadeInOut]="visible">
+    <div class="row chat-box-header">
+     
+       <div class="col-8">
+        <h6 class="operator-name truncate icon-color">
+          {{chatTitle}}
+        </h6>
+      </div>  
+      
+      <div class="col-2 pull-right">
+        <label
+            class="font-size-1_5em icon-label icon-color"
+            nbTooltip="refresh"
+            (click)="refreshChat()"
+            nbTooltipPlacement="bottom"
+        >
+            <nb-icon
+                icon="redo"
+                status="primary"
+                pack="solid"
+            >
+            </nb-icon>
+        </label>
+    </div>
+
+        <div class="col-2 pull-right">
+          <label
+              class="font-size-1_5em icon-label icon-color"
+              nbTooltip="Back"
+              (click)="toggleChat()"
+              nbTooltipPlacement="bottom"
+          >
+              <nb-icon
+                  icon="times-circle"
+                  status="primary"
+                  pack="regular"
+              >
+              </nb-icon>
+          </label>
+      </div>
+    
+    </div>
+    <div class="chat-box-main">
+      <div class="chat-message-bottom" #bottom></div>
+      <ng-container *ngFor="let message of messages">
+        <div class="chat-message" [class.chat-message-received]="message.type === 'received'"
+             [@fadeIn]
+             [class.chat-message-sent]="message.type === 'sent'">
+          <div >
+            <div class="chat-message-date">
+              {{message.date | date: 'short'}}
+            </div>
+            <div class="chat-message-text">
+              {{message.text}}
+            </div>
+          </div>
+         
+        </div>
+      </ng-container>
+    </div>
+      <chat-input class="chat-box-footer" (send)="sendMessage($event)" (dismiss)="toggleChat()" [focus]="focus"></chat-input>
+
+  </div>
+  <button class="chat-button" *ngIf="!visible && isDocked" (click)="toggleChat()">
+    <span [@fadeIn] *ngIf="!visible">Message</span>
+  </button>
+</div>

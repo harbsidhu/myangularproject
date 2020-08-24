@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ASPIRE 2.0</title>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<!-- This is a image cropper to be used ngx-file-upload-->
+  <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.3/cropper.min.js"  async>  </script>
+<link  rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.3/cropper.css"  /> -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161682484-1"></script>
+</head>
+<body>
+  <ngx-app>Loading...</ngx-app>
+
+  <style>@-webkit-keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@-moz-keyframes spin{0%{-moz-transform:rotate(0)}100%{-moz-transform:rotate(360deg)}}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.spinner{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1003;background: #ffffff;overflow:hidden}  .spinner div:first-child{display:block;position:relative;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;box-shadow:0 3px 3px 0 rgba(255,56,106,1);transform:translate3d(0,0,0);animation:spin 2s linear infinite}  .spinner div:first-child:after,.spinner div:first-child:before{content:'';position:absolute;border-radius:50%}  .spinner div:first-child:before{top:5px;left:5px;right:5px;bottom:5px;box-shadow:0 3px 3px 0 rgb(255, 228, 32);-webkit-animation:spin 3s linear infinite;animation:spin 3s linear infinite}  .spinner div:first-child:after{top:15px;left:15px;right:15px;bottom:15px;box-shadow:0 3px 3px 0 rgba(61, 175, 255,1);animation:spin 1.5s linear infinite}</style>
+  <div id="nb-global-spinner" class="spinner">
+    <div class="blob blob-0"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+  </div>
+  <!-- <div id="nb-global-spinner" class="spinner">
+  <div class="loader quantum-spinner"></div>
+  </div> -->
+<!-- <style>
+
+/*
+The loaders use CSS custom properties (variables) to control the attributes of the loaders
+*/
+:root{
+	--loader-width: 70px;
+	--loader-height: 70px;
+	--loader-color-primary: #27ae60;
+	--loader-color-secondary: #eee;
+	--line-width: 3px;
+	--animation-duration: 2s;
+	--loader-initial-scale: 0.1;
+}
+.loader,.loader:before,.loader:after{
+	box-sizing: border-box;
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+/*
+In order to get optimal results, please only change the
+variables above and don't change anything in the actual loader code
+*/
+
+
+
+
+@keyframes momentum {
+    0%   {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.loader.quantum-spinner {
+    --primary-circle-offset: calc(((var(--loader-width,100px) * 0.2) / 2) - var(--line-width,4px));
+    --secondary-circle-offset: calc(((var(--loader-width,100px) * 0.4) / 2) - var(--line-width,4px)); /*- (var(--line-width,4px) * 2)*/
+    position: relative;
+    width: var(--loader-width, 100px);
+    height: var(--loader-height, 100px);
+    transform-origin: center center;
+    border-radius: 50%;
+    border: var(--line-width, 4px) solid rgba(0,0,0,0);
+    border-top-color: var(--loader-color-primary, #33f);
+    animation: momentum var(--animation-duration, 1s) linear infinite;
+}
+
+.quantum-spinner:before {
+    content: "";
+    position: absolute;
+    transform-origin: center center;
+    top: var(--primary-circle-offset,10px);
+    left: var(--primary-circle-offset,10px);
+    width: calc(var(--loader-width,100px) * 0.8);
+    height: calc(var(--loader-height,100px) * 0.8);
+    border-radius: 50%;
+    border: var(--line-width,4px) solid rgba(0,0,0,0);
+    border-top-color: var(--loader-color-primary, #33f);
+    opacity: 0.7;
+    filter: hue-rotate(3eg);
+    animation: momentum calc(var(--animation-duration, 1s) * 2) linear infinite;
+}
+
+.quantum-spinner:after {
+    content: "";
+    position: absolute;
+    top: var(--secondary-circle-offset,20px);
+    left: var(--secondary-circle-offset,20px);
+    width: calc(var(--loader-width,100px) * 0.6);
+    height: calc(var(--loader-height,100px) * 0.6);
+    border-radius: 50%;
+    transform-origin: center center;
+    border: var(--line-width,4px) solid rgba(0,0,0,0);
+    border-top-color: var(--loader-color-primary, #33f);
+    opacity: 0.3;
+    filter: hue-rotate(6eg);
+    animation: momentum var(--animation-duration, 1s) linear infinite;
+}
+</style> -->
+
+<!-- Stripe -->
+<script src="https://js.stripe.com/v3/"></script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+  <div *ngIf="!isToken" class="col-sm-12 col-md-7 col-lg-5 col-xxxl-4 justify-content-center">
+    <nb-card>
+      <nb-card-body>
+        <div class="row justify-content-center heading">
+          <label class="heading-label">Nearly there!</label>
+        </div>
+        <div class="row justify-content-center grey-text">
+          <div class="col-12 content-center">
+            <label>We've just sent an email to</label>
+          </div>
+          <div class="col-12 content-center black-text padding_0_5em">
+            <label>{{email}}</label>
+          </div>
+          <div class="col-12 content-center">
+            <label>Please check your email to verify your account</label>
+          </div>
+        </div>
+        <div class="row justify-content-center reset-form">
+              <div class="col-12 content-center">
+                <button nbButton (click)="navigateToHome()" class="padding-right-1em">Back to login</button>
+              </div>
+        </div>
+        <div class="row justify-content-center grey-text">
+          <div class="col-12 content-center">
+            <label class="fontsize-0_8em">Didn't receive an email? Check your spam or junk folder.
+              If you're still having trouble, please  <label class="nav-label" (click)="navigateToContactUs()">contact us</label> </label>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div *ngIf="isToken" class="col-sm-12 col-md-7 col-lg-5 col-xxxl-4 justify-content-center">
+    <nb-card>
+      <nb-card-body>
+        <div class="row justify-content-center heading">
+          <label class="heading-label">Thank you!</label>
+        </div>
+        <div class="row justify-content-center grey-text">
+
+          <div class="col-12 content-center black-text padding_0_5em">
+            <label>Your email as been verified and your account is now active.</label>
+          </div>
+        </div>
+        <div *ngIf="isTokenProcessed" class="row justify-content-center reset-form">
+              <div class="col-12 content-center">
+                <button nbButton (click)="navigateToHome()" class="padding-right-1em">login to your account</button>
+              </div>
+        </div>
+        <div class="row justify-content-center grey-text">
+          <div class="col-12 content-center">
+            <label class="fontsize-0_8em">Thank you for choosing ASPIRE!
+            </label>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

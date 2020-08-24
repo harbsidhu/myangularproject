@@ -1,0 +1,35 @@
+<nb-card>
+    <nb-card-header>
+        <div class="row">
+            <div class="col-6">
+                {{ title }}
+            </div>
+            <div class="col-6">
+                <nb-select placeholder="Select Camera" [(ngModel)]="selectedCamera" shape="round"
+                    (selectedChange)="changeCamera($event);">
+                    <nb-option *ngFor="let camera of cameras" [value]="camera.deviceId">{{camera.label}}</nb-option>
+                </nb-select>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <video #stream id="stream" width="100%" height="100%" [hidden]="isCaptured"></video>
+                <canvas #capture id="capture" width="100%" height="100%" hidden></canvas>
+                <div #snapshot id="snapshot" width="100%" height="100%" [hidden]="!isCaptured"></div>
+            </div>
+        </div>
+
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="row">
+            <div class="col-12 text-right">
+                <button nbButton
+                    (click)="captureSnapshot()">{{isCaptured ? 'Take screenshot again' : 'Capture'}}</button>
+                <button class="ml-3" nbButton (click)="ok()" status="success">Ok</button>
+                <button class="ml-3" nbButton (click)="dismiss()" status="danger">Close</button>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

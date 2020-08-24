@@ -1,0 +1,43 @@
+import { Address } from './address';
+import { Company } from './company';
+import { User } from './user';
+import { Resource } from './resource';
+import { Unit } from './unit';
+import { Frequency } from './frequency';
+import { ResourceListType } from './resourceListType';
+import { Attribute } from './attribute';
+import { ResourceImage } from './resourceImage';
+import { ResourceCommodity } from './resourceCommodity';
+import { Commodity } from './commodity';
+
+export class ResourceListing {
+    id: number;
+    idString: string;
+    resource: Resource;
+    commodity: Commodity;
+    description: string;
+    quantity: number;
+    attribute: Attribute;
+    attributeString: string;
+    unit: Unit;
+    frequency: Frequency;
+    address: Address;
+    companyId: number;
+    company: Company;
+    resourceListType: ResourceListType;
+    sellPrice: number;
+    priceNegotiable: number;
+    freeListingPrice: number;
+    freeApproxPrice: number;
+    disposalPrice: number;
+    disposalApproxPrice: number;
+    createdOn: Date;
+    views: number;
+    user: User;
+    resourceImages: ResourceImage[];
+    approved: boolean;
+    isResourceMigrated: boolean;
+    expired: boolean;
+    startDate: Date;
+    expiryDateTimeUTC: Date;
+}

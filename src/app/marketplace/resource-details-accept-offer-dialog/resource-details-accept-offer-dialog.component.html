@@ -1,0 +1,26 @@
+<nb-card>
+  <nb-card-header>Accept</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col">
+            <label > 
+              You are about to Accept this offer, by doing so you acknowledge 
+            </label>
+            <br/> 
+            <label> 
+              and agree to ASPIRE’s 
+            </label>&nbsp; 
+            <label class="nav-label" (click)="openTnC();"> terms & conditions
+            </label>.  Are you sure you would
+            <br/> 
+            <label> 
+              like to proceed?
+            </label>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>      
+    <button nbButton (click)="submit()">Proceed</button>
+    <button class="pull-right" status="danger"  nbButton (click)="cancel()">Cancel</button>       
+  </nb-card-footer>
+</nb-card>

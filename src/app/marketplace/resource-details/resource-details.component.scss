@@ -1,0 +1,111 @@
+ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-arrow {
+    color:#ffffff;
+    text-shadow: 0px 0px 5px #008000;
+}
+
+ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-image {
+    border: solid 4px #fff;
+}
+
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow {
+    color:#ffffff;
+    text-shadow: 0px 0px 5px #008000;
+}
+ngx-gallery /deep/ .ngx-gallery-image-wrapper{
+    border: solid 1px #eaeaea !important;
+}
+.gallery-border {
+    padding: .2em;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.title-spacing {
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+}
+.top-border{
+    border-top: 2px solid #eaeaea;
+}
+
+.min-width-30em{
+    min-width: 30em;
+}
+
+.min-width-20em{
+    min-width: 20em;
+}
+
+.margin-top-08em{
+    margin-top: 0.8em;
+}
+
+.bidding-background{
+    background: #F7F9FC;
+    
+}
+
+.bottom-margin10{
+    margin-bottom: 10px;
+}
+
+.bottom-border1{
+    border-bottom: 1px solid #eaeaea;
+}
+
+.bottom-border2{
+    border-bottom: 2px solid #eaeaea;
+}
+
+.font-small {
+    font-size: .7em;
+    margin-bottom: 0;
+
+}
+
+.blue {
+    color: #5b7efc;
+}
+.row-height1-4em {
+    height: 1.4em;
+}
+
+nb-icon{
+    line-height: 0.8em;
+    margin-right: 0.4em;
+}
+
+.nav-label {
+    padding-top: 1em;
+    font-weight: 600;
+    color: #67df7c;
+    cursor: pointer;
+}
+
+.editListing {
+    font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 12px;
+/* identical to box height, or 75% */
+
+letter-spacing: 0.03em;
+text-decoration-line: underline;
+cursor: pointer;
+color: #67DF7C;
+margin-block-start: 2.33em;
+    margin-block-end: 2.33em;
+}
+
+.font-transparent
+{
+    color: transparent;
+}
+
+
+.input-background
+{
+    background: rgba(103, 223, 124, 0.08)
+}

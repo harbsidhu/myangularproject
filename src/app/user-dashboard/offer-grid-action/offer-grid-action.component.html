@@ -1,0 +1,56 @@
+<label class="icon-label" *ngIf="showControls" nbTooltip="Reject" (click)="openDialog(dialogReject);" nbTooltipPlacement="bottom">
+    <nb-icon icon="times" status="primary" pack="solid">
+    </nb-icon>
+  </label>
+  <label class="icon-label" *ngIf="showControls" nbTooltip="Approve" (click)="openDialog(dialogApprove);" nbTooltipPlacement="bottom">
+    <nb-icon icon="check" status="primary" pack="solid">
+    </nb-icon>
+  </label>
+  <label class="icon-label"  nbTooltip="Chat" (click)="openChatDialog();" nbTooltipPlacement="bottom">
+    <nb-icon icon="comment-dots" status="primary" pack="solid">
+    </nb-icon>
+  </label>
+  <ng-template #dialogReject let-data let-ref="dialogRef">
+    <nb-card>
+      <nb-card-header>Reject Offer</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col">
+                <label class="nav-label">
+                  You are about to <label><b>Reject</b></label> this offer,
+                </label>
+                <br/>
+                <label class="nav-label">
+                  are you sure you would like to proceed?
+                </label>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton status="danger" (click)="rejectOffer()">Reject</button>
+        <button class="pull-right" nbButton (click)="ref.close()">Cancel</button>
+      </nb-card-footer>
+    </nb-card>
+  </ng-template>
+  <ng-template #dialogApprove let-data let-ref="dialogRef">
+    <nb-card>
+      <nb-card-header>Approve Offer</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col">
+                <label class="nav-label">
+                  You are about to <b>Approve</b> this offer,
+                </label>
+                <br/>
+                <label class="nav-label">
+                  are you sure you would like to proceed?
+                </label>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton (click)="approveOffer()">Approve</button>
+        <button class="pull-right" nbButton (click)="ref.close()">Cancel</button>
+      </nb-card-footer>
+    </nb-card>
+  </ng-template>
